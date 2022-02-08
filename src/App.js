@@ -3,7 +3,14 @@ import React, { useEffect, useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import Todo from "./Todo";
 import { db } from "./firebase";
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  addDoc,
+  serverTimestamp,
+  orderBy,
+  query,
+} from "firebase/firestore";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -12,9 +19,12 @@ function App() {
   // When the app loads, we need to listen to the database and fetch new todos as they get added/removed
   useEffect(() => {
     // This code here... fires when the app.js loads
-    onSnapshot(collection(db, "todos"), (snapshot) => {
-      setTodos(snapshot.docs.map((doc) => doc.data().todo));
-    });
+    onSnapshot(
+      query(collection(db, "todos"), orderBy("timestamp", "desc")),
+      (snapshot) => {
+        setTodos(snapshot.docs.map((doc) => doc.data().todo));
+      }
+    );
   }, [input]);
 
   const [titles, setTitles] = useState([]);
@@ -25,10 +35,13 @@ function App() {
 
   const addTodo = (event) => {
     event.preventDefault(); // will stop the REFRESH
-    console.log("👽", "I'm working");
-    setTodos([...todos, input]);
+
+    addDoc(collection(db, "todos"), {
+      todo: input,
+      timestamp: serverTimestamp(),
+    });
+
     setInput(""); // clear up the input after clicking add todo button
-    console.log(todos);
   };
 
   const addTitle = (event) => {
