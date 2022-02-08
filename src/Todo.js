@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   List,
   ListItem,
@@ -7,6 +7,7 @@ import {
   Avatar,
   ImageIcon,
   Button,
+  Modal,
 } from "@mui/material";
 import "./Todo.css";
 import { db } from "./firebase";
@@ -14,16 +15,34 @@ import { collection, deleteDoc, doc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 function Todo(props) {
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
-    <List className="todo__list">
-      <ListItem>
-        <ListItemAvatar></ListItemAvatar>
-        <ListItemText primary={props.todo.todo} secondary="Dummy deadline ⏰" />
-      </ListItem>
-      <DeleteForeverIcon
-        onClick={(event) => deleteDoc(doc(db, "todos", props.todo.id))}
-      />
-    </List>
+    <>
+      <Modal open={open} onClose={(e) => setOpen(false)}>
+        <div>
+          <h1>I am a modal</h1>
+          <button onClick={(e) => setOpen(false)}></button>
+        </div>
+      </Modal>
+      <List>
+        <ListItem>
+          <ListItemAvatar></ListItemAvatar>
+          <ListItemText
+            primary={props.todo.todo}
+            secondary="Dummy deadline ⏰"
+          />
+        </ListItem>
+        <button onClick={(e) => setOpen(true)}>Edit</button>
+        <DeleteForeverIcon
+          onClick={(event) => deleteDoc(doc(db, "todos", props.todo.id))}
+        />
+      </List>
+    </>
   );
 }
 
