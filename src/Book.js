@@ -55,7 +55,7 @@ function Book(props) {
           <ListItemAvatar></ListItemAvatar>
           <ListItemText
             primary={props.book.body}
-            // secondary={props.book.title}
+            secondary={props.book.title}
           />
         </ListItem>
         <button onClick={(e) => setOpen(true)}>Edit</button>
