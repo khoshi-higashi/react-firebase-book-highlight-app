@@ -11,6 +11,7 @@ import {
 import "./Todo.css";
 import { db } from "./firebase";
 import { collection, deleteDoc, doc } from "firebase/firestore";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 function Todo(props) {
   return (
@@ -19,9 +20,9 @@ function Todo(props) {
         <ListItemAvatar></ListItemAvatar>
         <ListItemText primary={props.todo.todo} secondary="Dummy deadline ⏰" />
       </ListItem>
-      <Button onClick={(event) => deleteDoc(doc(db, "todos", props.todo.id))}>
-        ❌ DELETE ME
-      </Button>
+      <DeleteForeverIcon
+        onClick={(event) => deleteDoc(doc(db, "todos", props.todo.id))}
+      />
     </List>
   );
 }
