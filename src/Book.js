@@ -50,19 +50,21 @@ function Book(props) {
           <Button onClick={UpdateBook}>Update Book</Button>
         </Box>
       </Modal>
-      <List>
-        <ListItem>
-          <ListItemAvatar></ListItemAvatar>
-          <ListItemText
-            primary={props.book.body}
-            secondary={props.book.title}
+      <div className="book">
+        <List>
+          <ListItem>
+            <ListItemAvatar></ListItemAvatar>
+            <ListItemText
+              primary={props.book.body}
+              secondary={props.book.title}
+            />
+          </ListItem>
+          <button onClick={(e) => setOpen(true)}>Edit</button>
+          <DeleteForeverIcon
+            onClick={(event) => deleteDoc(doc(db, "books", props.book.id))}
           />
-        </ListItem>
-        <button onClick={(e) => setOpen(true)}>Edit</button>
-        <DeleteForeverIcon
-          onClick={(event) => deleteDoc(doc(db, "books", props.book.id))}
-        />
-      </List>
+        </List>
+      </div>
     </>
   );
 }
