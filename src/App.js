@@ -1,9 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
-// import Button from "@mui/material/Button";
-// import InputLabel from "@mui/material/InputLabel";
-// import { FormControl } from "@mui/material/FormControl";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
+import Todo from "./Todo";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -73,7 +71,7 @@ function App() {
       </form>
       <ul>
         {todos.map((todo) => (
-          <li>{todo}</li>
+          <Todo text={todo} />
         ))}
       </ul>
 
