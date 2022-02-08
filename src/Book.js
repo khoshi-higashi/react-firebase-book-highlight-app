@@ -8,6 +8,9 @@ import {
   ImageIcon,
   Button,
   Modal,
+  Input,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import "./Book.css";
 import { db } from "./firebase";
@@ -18,13 +21,20 @@ import Box from "@mui/material/Box";
 function Book(props) {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputAuthor, setInputAuthor] = useState("");
+  const [inputBody, setInputBody] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
   };
 
   const UpdateBook = () => {
-    // updateDoc(doc(db, "books", props.book.id), { book: input });
+    updateDoc(doc(db, "books", props.book.id), {
+      title: inputTitle,
+      author: inputAuthor,
+      body: inputBody,
+    });
     setOpen(false);
   };
 
@@ -42,11 +52,27 @@ function Book(props) {
           }}
         >
           <h1>I am a modal</h1>
-          <input
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-            placeholder=""
-          />
+          <FormControl>
+            <InputLabel>Title</InputLabel>
+            <Input
+              value={inputTitle}
+              onChange={(event) => setInput(event.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel>Author</InputLabel>
+            <Input
+              value={inputAuthor}
+              onChange={(event) => setInput(event.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel>Body</InputLabel>
+            <Input
+              value={inputBody}
+              onChange={(event) => setInput(event.target.value)}
+            />
+          </FormControl>
           <Button onClick={UpdateBook}>Update Book</Button>
         </Box>
       </Modal>
