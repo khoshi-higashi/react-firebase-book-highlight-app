@@ -16,16 +16,25 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
 
+  const todosCollectionRef = collection(db, "todos");
+
   // When the app loads, we need to listen to the database and fetch new todos as they get added/removed
   useEffect(() => {
     // This code here... fires when the app.js loads
     onSnapshot(
-      query(collection(db, "todos"), orderBy("timestamp", "desc")),
+      query(todosCollectionRef, orderBy("timestamp", "desc")),
       (snapshot) => {
-        setTodos(snapshot.docs.map((doc) => doc.data().todo));
+        setTodos(
+          snapshot.docs.map((doc) => {
+            return {
+              id: doc.id,
+              todo: doc.data().todo,
+            };
+          })
+        );
       }
     );
-  }, [input]);
+  }, []);
 
   const [titles, setTitles] = useState([]);
   const [author, setAuthor] = useState([]);
@@ -92,7 +101,7 @@ function App() {
       </form>
       <ul>
         {todos.map((todo) => (
-          <Todo text={todo} />
+          <Todo todo={todo} />
         ))}
       </ul>
 
