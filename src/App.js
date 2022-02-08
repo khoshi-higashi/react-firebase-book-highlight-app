@@ -1,7 +1,7 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
-import Todo from "./Todo";
+import Book from "./Book";
 import { db } from "./firebase";
 import {
   collection,
@@ -13,22 +13,25 @@ import {
 } from "firebase/firestore";
 
 function App() {
-  const [todos, setTodos] = useState([]);
   const [input, setInput] = useState("");
-
-  const todosCollectionRef = collection(db, "todos");
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputAuthor, setInputAuthor] = useState("");
+  const [inputBody, setInputBody] = useState("");
+  const [books, setBooks] = useState([]);
+  const booksCollectionRef = collection(db, "books");
 
   // When the app loads, we need to listen to the database and fetch new todos as they get added/removed
   useEffect(() => {
     // This code here... fires when the app.js loads
     onSnapshot(
-      query(todosCollectionRef, orderBy("timestamp", "desc")),
+      query(booksCollectionRef, orderBy("No", "desc")),
       (snapshot) => {
-        setTodos(
+        setBooks(
           snapshot.docs.map((doc) => {
             return {
               id: doc.id,
-              todo: doc.data().todo,
+              // book: doc.data(),
+              ...doc.data(),
             };
           })
         );
@@ -36,133 +39,61 @@ function App() {
     );
   }, []);
 
-  const [titles, setTitles] = useState([]);
-  const [author, setAuthor] = useState([]);
-  const [body, setBody] = useState([]);
-
-  // console.log("🔫", input);
-
-  const addTodo = (event) => {
+  const addBook = (event) => {
     event.preventDefault(); // will stop the REFRESH
-
-    addDoc(collection(db, "todos"), {
-      todo: input,
+    addDoc(collection(db, "books"), {
+      title: inputTitle,
+      author: inputAuthor,
+      body: inputBody,
       timestamp: serverTimestamp(),
     });
-
-    setInput(""); // clear up the input after clicking add todo button
-  };
-
-  const addTitle = (event) => {
-    event.preventDefault(); // will stop the REFRESH
-    console.log("👽", "I'm working");
-    setTitles([...titles, input]);
-    setInput(""); // clear up the input after clicking add todo button
-    console.log(titles);
-  };
-
-  const addAuthor = (event) => {
-    event.preventDefault(); // will stop the REFRESH
-    console.log("👽", "I'm working");
-    setAuthor([...author, input]);
-    setInput(""); // clear up the input after clicking add todo button
-    console.log(author);
-  };
-
-  const addBody = (event) => {
-    event.preventDefault(); // will stop the REFRESH
-    console.log("👽", "I'm working");
-    setBody([...body, input]);
-    setInput(""); // clear up the input after clicking add todo button
-    console.log(body);
+    setInputTitle(""); // clear up the input after clicking add todo button
+    setInputAuthor(""); // clear up the input after clicking add todo button
+    setInputBody(""); // clear up the input after clicking add todo button
   };
 
   return (
     <div className="App">
-      <h1>Hello Clever Programmers 🚀!</h1>
-      <form>
-        <FormControl>
-          <InputLabel>✅ Write a Todo</InputLabel>
-          <Input
-            value={input}
-            onChange={(event) => setInput(event.target.value)}
-          />
-        </FormControl>
-
-        <Button
-          type="submit"
-          onClick={addTodo}
-          variant="contained"
-          color="primary"
-          disabled={!input}
-        >
-          Add ToDo
-        </Button>
-      </form>
-      <ul>
-        {todos.map((todo) => (
-          <Todo todo={todo} />
-        ))}
-      </ul>
-
       <h1>Book highlight submission site 📚</h1>
       <form>
         <FormControl>
           <InputLabel>✅ Write a Title</InputLabel>
           <Input
-            value={titles}
-            onChange={(event) => setTitles(event.target.value)}
+            value={inputTitle}
+            onChange={(event) => setInputTitle(event.target.value)}
           />
         </FormControl>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={addTitle}
-          disabled={!titles}
-        >
-          Add Title
-        </Button>
-        <ul>
-          {titles.map((title) => (
-            <li>{title}</li>
-          ))}
-        </ul>
-
         <FormControl>
           <InputLabel>✅ Write a Author</InputLabel>
           <Input
-            value={author}
-            onChange={(event) => setAuthor(event.target.value)}
+            value={inputAuthor}
+            onChange={(event) => setInputAuthor(event.target.value)}
           />
         </FormControl>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          onClick={addAuthor}
-          disabled={!author}
-        >
-          Add Author
-        </Button>
-
         <FormControl>
-          <InputLabel>✅ Write a Body</InputLabel>
+          <InputLabel>✅ Write Body</InputLabel>
           <Input
-            value={body}
-            onChange={(event) => setBody(event.target.value)}
+            value={inputBody}
+            onChange={(event) => setInputBody(event.target.value)}
           />
         </FormControl>
+
         <Button
+          type="submit"
+          onClick={addBook}
           variant="contained"
           color="primary"
-          type="submit"
-          onClick={addBody}
-          disabled={!body}
+          disabled={!inputBody}
         >
-          Add Body
+          Add Highlight
         </Button>
       </form>
+
+      <ul>
+        {books.map((book, i) => (
+          <Book book={book} />
+        ))}
+      </ul>
     </div>
   );
 }
