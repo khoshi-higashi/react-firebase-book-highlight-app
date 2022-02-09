@@ -28,7 +28,7 @@ function App() {
 
   const items = (
     <ul>
-      {books.map((book, i) => (
+      {books.map((book) => (
         <Book book={book} />
       ))}
     </ul>
@@ -38,7 +38,8 @@ function App() {
   useEffect(() => {
     // This code here... fires when the app.js loads
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "asc", limit(10))),
+      query(booksCollectionRef, orderBy("timestamp", "desc")),
+      // booksCollectionRef,
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -66,6 +67,10 @@ function App() {
     setInputBody(""); // clear up the input after clicking add todo button
   };
 
+  useEffect(() => {
+    console.log("📚", inputTitle, "📕", inputAuthor, "📖", inputBody);
+  });
+
   return (
     <div className="App">
       <h1>Book highlight submission site 📚</h1>
@@ -73,7 +78,7 @@ function App() {
         <FormControl>
           <InputLabel>✅ Write a Title</InputLabel>
           <Input
-            value={input}
+            value={inputTitle}
             onChange={(event) => setInputTitle(event.target.value)}
           />
         </FormControl>
@@ -103,7 +108,7 @@ function App() {
         </Button>
       </form>
 
-      <InfiniteScroll
+      {/* <InfiniteScroll
         pageStart={0}
         loadMore={loadFunc}
         hasMore={true || false}
@@ -112,14 +117,14 @@ function App() {
             Loading...
           </div>
         }
-      >
-        {/* <ul>
+      > */}
+      {/* <ul>
           {books.map((book, i) => (
             <Book book={book} />
           ))}
         </ul> */}
-        {items}
-      </InfiniteScroll>
+      {items}
+      {/* </InfiniteScroll> */}
     </div>
   );
 }
