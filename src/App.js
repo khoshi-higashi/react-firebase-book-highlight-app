@@ -27,7 +27,7 @@ function App() {
   };
 
   const items = (
-    <ul>
+    <ul className="books">
       {books.map((book) => (
         <Book book={book} />
       ))}

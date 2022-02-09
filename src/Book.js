@@ -12,7 +12,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import "./Book.css";
+// import "./Book.css";
 import { db } from "./firebase";
 import { collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -97,7 +97,7 @@ function Book(props) {
       <div className="book">
         <List>
           <ListItem>
-            <ListItemAvatar></ListItemAvatar>
+            {/* <ListItemAvatar></ListItemAvatar> */}
             <ListItemText
               primary={props.book.body}
               secondary={props.book.title}
