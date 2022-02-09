@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import Book from "./Book";
-import { db } from "./firebase";
+import { db, auth, provider } from "./firebase";
 import {
   collection,
   onSnapshot,
@@ -13,6 +13,7 @@ import {
   limit,
 } from "firebase/firestore";
 import InfiniteScroll from "react-infinite-scroller";
+import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const [input, setInput] = useState("");
@@ -20,6 +21,7 @@ function App() {
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
   const [books, setBooks] = useState([]);
+  const [user, setUser] = useState(null);
   const booksCollectionRef = collection(db, "books");
 
   const loadFunc = (page) => {
@@ -71,9 +73,70 @@ function App() {
     console.log("📚", inputTitle, "📕", inputAuthor, "📖", inputBody);
   });
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("ログインしています！");
+      } else {
+        console.log("ログインいません！");
+      }
+    });
+  }, []);
+
+  // const { user } = useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       <Button onClick={() => auth.signOut()}>Logout</Button>;
+  //     } else {
+  //       <Button onClick={() => signInWithPopup(auth, provider)}>
+  //         Sign In
+  //       </Button>;
+  //     }
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        // user has logged in...
+        // console.log(authUser);
+        setUser(authUser);
+      } else {
+        // user has logged out...
+        setUser(null);
+      }
+    });
+
+    return () => {
+      // person some cleanup actions
+      unsubscribe();
+    };
+  }, [user]);
+
   return (
     <div className="App">
       <h1>Book highlight submission site 📚</h1>
+      <div className="app__header">
+        {/* {user ? (
+          <Button onClick={() => auth.signOut()}>Logout</Button>
+          ) : (
+            <div className="app__loginContainer">
+            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+            </div>
+          )} */}
+        <div className="app__loginContainer">
+          {!user ? (
+            <Button onClick={() => signInWithPopup(auth, provider)}>
+              Sign In
+            </Button>
+          ) : (
+            <Button onClick={() => auth.signOut()}>Logout</Button>
+          )}
+          {/* <Button>Sign Up</Button> */}
+        </div>
+      </div>
+
       <form>
         <FormControl>
           <InputLabel>✅ Write a Title</InputLabel>
