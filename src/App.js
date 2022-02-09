@@ -10,7 +10,9 @@ import {
   serverTimestamp,
   orderBy,
   query,
+  limit,
 } from "firebase/firestore";
+import InfiniteScroll from "react-infinite-scroller";
 
 function App() {
   const [input, setInput] = useState("");
@@ -20,11 +22,24 @@ function App() {
   const [books, setBooks] = useState([]);
   const booksCollectionRef = collection(db, "books");
 
+  const loadFunc = (page) => {
+    setBooks([...books, page]);
+  };
+
+  const items = (
+    <ul className="books">
+      {books.map((book) => (
+        <Book book={book} />
+      ))}
+    </ul>
+  );
+
   // When the app loads, we need to listen to the database and fetch new todos as they get added/removed
   useEffect(() => {
     // This code here... fires when the app.js loads
     onSnapshot(
-      query(booksCollectionRef, orderBy("No", "desc")),
+      query(booksCollectionRef, orderBy("timestamp", "desc")),
+      // booksCollectionRef,
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -51,6 +66,10 @@ function App() {
     setInputAuthor(""); // clear up the input after clicking add todo button
     setInputBody(""); // clear up the input after clicking add todo button
   };
+
+  useEffect(() => {
+    console.log("📚", inputTitle, "📕", inputAuthor, "📖", inputBody);
+  });
 
   return (
     <div className="App">
@@ -89,11 +108,23 @@ function App() {
         </Button>
       </form>
 
-      <ul>
-        {books.map((book, i) => (
-          <Book book={book} />
-        ))}
-      </ul>
+      {/* <InfiniteScroll
+        pageStart={0}
+        loadMore={loadFunc}
+        hasMore={true || false}
+        loader={
+          <div className="loader" key={0}>
+            Loading...
+          </div>
+        }
+      > */}
+      {/* <ul>
+          {books.map((book, i) => (
+            <Book book={book} />
+          ))}
+        </ul> */}
+      {items}
+      {/* </InfiniteScroll> */}
     </div>
   );
 }
