@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -13,10 +13,11 @@ import {
   InputLabel,
 } from "@mui/material";
 // import "./Book.css";
-import { db } from "./firebase";
+import { db, auth, provider } from "./firebase";
 import { collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
+import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
 function Book(props) {
   const [open, setOpen] = useState(false);
@@ -24,10 +25,43 @@ function Book(props) {
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
+  const [user, setUser] = useState(null);
 
   const handleOpen = () => {
     setOpen(true);
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        // user has logged in...
+        // console.log(authUser);
+        setUser(authUser);
+      } else {
+        // user has logged out...
+        setUser(null);
+      }
+    });
+    return () => {
+      // person some cleanup actions
+      unsubscribe();
+    };
+  }, [user]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+        });
+        console.log("ログインしています！", user.displayName);
+      } else {
+        console.log("ログインいません！");
+        setUser(null);
+      }
+    });
+  }, []);
 
   const UpdateBook = () => {
     if (inputTitle !== "") {
@@ -45,6 +79,9 @@ function Book(props) {
         body: inputBody,
       });
     }
+    updateDoc(doc(db, "books", props.book.id), {
+      user: user.displayName,
+    });
     setInputTitle(""); // clear up the input after clicking add todo button
     setInputAuthor(""); // clear up the input after clicking add todo button
     setInputBody(""); // clear up the input after clicking add todo button
@@ -99,14 +136,20 @@ function Book(props) {
           <ListItem>
             {/* <ListItemAvatar></ListItemAvatar> */}
             <ListItemText
-              primary={props.book.body}
+              primary={"”" + props.book.body + "”"}
               secondary={props.book.title + ", " + props.book.author}
             />
           </ListItem>
-          <button onClick={(e) => setOpen(true)}>Edit</button>
-          <DeleteForeverIcon
-            onClick={(event) => deleteDoc(doc(db, "books", props.book.id))}
-          />
+          {user ? (
+            <>
+              <button onClick={(e) => setOpen(true)}>Edit</button>
+              <DeleteForeverIcon
+                onClick={(event) => deleteDoc(doc(db, "books", props.book.id))}
+              />
+            </>
+          ) : (
+            <></>
+          )}
         </List>
       </div>
     </>
