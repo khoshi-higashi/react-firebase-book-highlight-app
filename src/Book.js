@@ -30,11 +30,24 @@ function Book(props) {
   };
 
   const UpdateBook = () => {
-    updateDoc(doc(db, "books", props.book.id), {
-      title: inputTitle,
-      author: inputAuthor,
-      body: inputBody,
-    });
+    if (inputTitle !== "") {
+      updateDoc(doc(db, "books", props.book.id), {
+        title: inputTitle,
+      });
+    }
+    if (inputAuthor !== "") {
+      updateDoc(doc(db, "books", props.book.id), {
+        author: inputAuthor,
+      });
+    }
+    if (inputBody !== "") {
+      updateDoc(doc(db, "books", props.book.id), {
+        body: inputBody,
+      });
+    }
+    setInputTitle(""); // clear up the input after clicking add todo button
+    setInputAuthor(""); // clear up the input after clicking add todo button
+    setInputBody(""); // clear up the input after clicking add todo button
     setOpen(false);
   };
 
@@ -56,24 +69,29 @@ function Book(props) {
             <InputLabel>Title</InputLabel>
             <Input
               value={inputTitle}
-              onChange={(event) => setInput(event.target.value)}
+              onChange={(event) => setInputTitle(event.target.value)}
             />
           </FormControl>
           <FormControl>
             <InputLabel>Author</InputLabel>
             <Input
               value={inputAuthor}
-              onChange={(event) => setInput(event.target.value)}
+              onChange={(event) => setInputAuthor(event.target.value)}
             />
           </FormControl>
           <FormControl>
             <InputLabel>Body</InputLabel>
             <Input
               value={inputBody}
-              onChange={(event) => setInput(event.target.value)}
+              onChange={(event) => setInputBody(event.target.value)}
             />
           </FormControl>
-          <Button onClick={UpdateBook}>Update Book</Button>
+          <Button
+            onClick={UpdateBook}
+            disabled={!inputBody && !inputAuthor && !inputTitle}
+          >
+            Update Book
+          </Button>
         </Box>
       </Modal>
       <div className="book">
