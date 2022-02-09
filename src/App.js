@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import Book from "./Book";
-import { db } from "./firebase";
+import { db, auth, provider } from "./firebase";
 import {
   collection,
   onSnapshot,
@@ -13,6 +13,7 @@ import {
   limit,
 } from "firebase/firestore";
 import InfiniteScroll from "react-infinite-scroller";
+import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const [input, setInput] = useState("");
@@ -20,6 +21,7 @@ function App() {
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
   const [books, setBooks] = useState([]);
+  const [user, setUser] = useState(null);
   const booksCollectionRef = collection(db, "books");
 
   const loadFunc = (page) => {
@@ -61,6 +63,7 @@ function App() {
       author: inputAuthor,
       body: inputBody,
       timestamp: serverTimestamp(),
+      user: user.displayName,
     });
     setInputTitle(""); // clear up the input after clicking add todo button
     setInputAuthor(""); // clear up the input after clicking add todo button
@@ -71,60 +74,97 @@ function App() {
     console.log("📚", inputTitle, "📕", inputAuthor, "📖", inputBody);
   });
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("ログインしています！");
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+        });
+      } else {
+        console.log("ログインいません！");
+        setUser(null);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        // user has logged in...
+        // console.log(authUser);
+        setUser(authUser);
+      } else {
+        // user has logged out...
+        setUser(null);
+      }
+    });
+
+    return () => {
+      // person some cleanup actions
+      unsubscribe();
+    };
+  }, [user]);
+
   return (
     <div className="App">
       <h1>Book highlight submission site 📚</h1>
-      <form>
-        <FormControl>
-          <InputLabel>✅ Write a Title</InputLabel>
-          <Input
-            value={inputTitle}
-            onChange={(event) => setInputTitle(event.target.value)}
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel>✅ Write a Author</InputLabel>
-          <Input
-            value={inputAuthor}
-            onChange={(event) => setInputAuthor(event.target.value)}
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel>✅ Write Body</InputLabel>
-          <Input
-            value={inputBody}
-            onChange={(event) => setInputBody(event.target.value)}
-          />
-        </FormControl>
+      <div className="app__header">
+        <div className="app__loginContainer">
+          {!user ? (
+            <Button onClick={() => signInWithPopup(auth, provider)}>
+              Sign In
+            </Button>
+          ) : (
+            <>
+              <p>{user && user.displayName}</p>
+              <Button onClick={() => auth.signOut()}>Logout</Button>
+            </>
+          )}
+        </div>
+      </div>
 
-        <Button
-          type="submit"
-          onClick={addBook}
-          variant="contained"
-          color="primary"
-          disabled={!inputBody}
-        >
-          Add Highlight
-        </Button>
-      </form>
+      {user ? (
+        <>
+          <form>
+            <FormControl>
+              <InputLabel>✅ Write a Title</InputLabel>
+              <Input
+                value={inputTitle}
+                onChange={(event) => setInputTitle(event.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel>✅ Write a Author</InputLabel>
+              <Input
+                value={inputAuthor}
+                onChange={(event) => setInputAuthor(event.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel>✅ Write Body</InputLabel>
+              <Input
+                value={inputBody}
+                onChange={(event) => setInputBody(event.target.value)}
+              />
+            </FormControl>
 
-      {/* <InfiniteScroll
-        pageStart={0}
-        loadMore={loadFunc}
-        hasMore={true || false}
-        loader={
-          <div className="loader" key={0}>
-            Loading...
-          </div>
-        }
-      > */}
-      {/* <ul>
-          {books.map((book, i) => (
-            <Book book={book} />
-          ))}
-        </ul> */}
-      {items}
-      {/* </InfiniteScroll> */}
+            <Button
+              type="submit"
+              onClick={addBook}
+              variant="contained"
+              color="primary"
+              disabled={!inputBody}
+            >
+              Add Highlight
+            </Button>
+          </form>
+          <>{items}</>
+        </>
+      ) : (
+        <div>You need to login...</div>
+      )}
     </div>
   );
 }
