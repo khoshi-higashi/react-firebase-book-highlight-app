@@ -63,6 +63,7 @@ function App() {
       author: inputAuthor,
       body: inputBody,
       timestamp: serverTimestamp(),
+      user: user.displayName,
     });
     setInputTitle(""); // clear up the input after clicking add todo button
     setInputAuthor(""); // clear up the input after clicking add todo button
