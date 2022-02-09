@@ -83,18 +83,6 @@ function App() {
     });
   }, []);
 
-  // const { user } = useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       <Button onClick={() => auth.signOut()}>Logout</Button>;
-  //     } else {
-  //       <Button onClick={() => signInWithPopup(auth, provider)}>
-  //         Sign In
-  //       </Button>;
-  //     }
-  //   });
-  // }, []);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
@@ -117,14 +105,6 @@ function App() {
     <div className="App">
       <h1>Book highlight submission site 📚</h1>
       <div className="app__header">
-        {/* {user ? (
-          <Button onClick={() => auth.signOut()}>Logout</Button>
-          ) : (
-            <div className="app__loginContainer">
-            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
-            <Button onClick={() => setOpen(true)}>Sign Up</Button>
-            </div>
-          )} */}
         <div className="app__loginContainer">
           {!user ? (
             <Button onClick={() => signInWithPopup(auth, provider)}>
@@ -133,61 +113,48 @@ function App() {
           ) : (
             <Button onClick={() => auth.signOut()}>Logout</Button>
           )}
-          {/* <Button>Sign Up</Button> */}
         </div>
       </div>
 
-      <form>
-        <FormControl>
-          <InputLabel>✅ Write a Title</InputLabel>
-          <Input
-            value={inputTitle}
-            onChange={(event) => setInputTitle(event.target.value)}
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel>✅ Write a Author</InputLabel>
-          <Input
-            value={inputAuthor}
-            onChange={(event) => setInputAuthor(event.target.value)}
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel>✅ Write Body</InputLabel>
-          <Input
-            value={inputBody}
-            onChange={(event) => setInputBody(event.target.value)}
-          />
-        </FormControl>
+      {user ? (
+        <form>
+          <FormControl>
+            <InputLabel>✅ Write a Title</InputLabel>
+            <Input
+              value={inputTitle}
+              onChange={(event) => setInputTitle(event.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel>✅ Write a Author</InputLabel>
+            <Input
+              value={inputAuthor}
+              onChange={(event) => setInputAuthor(event.target.value)}
+            />
+          </FormControl>
+          <FormControl>
+            <InputLabel>✅ Write Body</InputLabel>
+            <Input
+              value={inputBody}
+              onChange={(event) => setInputBody(event.target.value)}
+            />
+          </FormControl>
 
-        <Button
-          type="submit"
-          onClick={addBook}
-          variant="contained"
-          color="primary"
-          disabled={!inputBody}
-        >
-          Add Highlight
-        </Button>
-      </form>
+          <Button
+            type="submit"
+            onClick={addBook}
+            variant="contained"
+            color="primary"
+            disabled={!inputBody}
+          >
+            Add Highlight
+          </Button>
+        </form>
+      ) : (
+        <></>
+      )}
 
-      {/* <InfiniteScroll
-        pageStart={0}
-        loadMore={loadFunc}
-        hasMore={true || false}
-        loader={
-          <div className="loader" key={0}>
-            Loading...
-          </div>
-        }
-      > */}
-      {/* <ul>
-          {books.map((book, i) => (
-            <Book book={book} />
-          ))}
-        </ul> */}
       {items}
-      {/* </InfiniteScroll> */}
     </div>
   );
 }
