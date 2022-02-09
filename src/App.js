@@ -126,44 +126,47 @@ function App() {
       </div>
 
       {user ? (
-        <form>
-          <FormControl>
-            <InputLabel>✅ Write a Title</InputLabel>
-            <Input
-              value={inputTitle}
-              onChange={(event) => setInputTitle(event.target.value)}
-            />
-          </FormControl>
-          <FormControl>
-            <InputLabel>✅ Write a Author</InputLabel>
-            <Input
-              value={inputAuthor}
-              onChange={(event) => setInputAuthor(event.target.value)}
-            />
-          </FormControl>
-          <FormControl>
-            <InputLabel>✅ Write Body</InputLabel>
-            <Input
-              value={inputBody}
-              onChange={(event) => setInputBody(event.target.value)}
-            />
-          </FormControl>
+        <>
+          <form>
+            <FormControl>
+              <InputLabel>✅ Write a Title</InputLabel>
+              <Input
+                value={inputTitle}
+                onChange={(event) => setInputTitle(event.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel>✅ Write a Author</InputLabel>
+              <Input
+                value={inputAuthor}
+                onChange={(event) => setInputAuthor(event.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel>✅ Write Body</InputLabel>
+              <Input
+                value={inputBody}
+                onChange={(event) => setInputBody(event.target.value)}
+              />
+            </FormControl>
 
-          <Button
-            type="submit"
-            onClick={addBook}
-            variant="contained"
-            color="primary"
-            disabled={!inputBody}
-          >
-            Add Highlight
-          </Button>
-        </form>
+            <Button
+              type="submit"
+              onClick={addBook}
+              variant="contained"
+              color="primary"
+              disabled={!inputBody}
+            >
+              Add Highlight
+            </Button>
+          </form>
+          <>{items}</>
+        </>
       ) : (
-        <></>
+          <>
+          <div>You need to login...</div>
+          </>
       )}
-
-      {items}
     </div>
   );
 }

@@ -136,11 +136,11 @@ function Book(props) {
           <ListItem>
             {/* <ListItemAvatar></ListItemAvatar> */}
             <ListItemText
-              primary={props.book.body}
+              primary={"”" + props.book.body + "”"}
               secondary={props.book.title + ", " + props.book.author}
             />
           </ListItem>
-          {props.book.user ? (
+          {user ? (
             <>
               <button onClick={(e) => setOpen(true)}>Edit</button>
               <DeleteForeverIcon
