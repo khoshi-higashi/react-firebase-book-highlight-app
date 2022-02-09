@@ -77,8 +77,13 @@ function App() {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("ログインしています！");
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+        });
       } else {
         console.log("ログインいません！");
+        setUser(null);
       }
     });
   }, []);
@@ -111,7 +116,10 @@ function App() {
               Sign In
             </Button>
           ) : (
-            <Button onClick={() => auth.signOut()}>Logout</Button>
+            <>
+              <p>{user && user.displayName}</p>
+              <Button onClick={() => auth.signOut()}>Logout</Button>
+            </>
           )}
         </div>
       </div>
