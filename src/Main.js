@@ -40,11 +40,11 @@ const Main = (props) => {
       {props.selectedItem !== 0 && (
         <div className="mainBook">
           <p>{props.selectedItem}</p>
-          <>
+          <div>
             {books.map((book) => (
               <Book book={book} />
             ))}
-          </>
+          </div>
         </div>
       )}
     </div>
