@@ -145,9 +145,10 @@ function Book(props) {
           <ListItem>
             {/* <ListItemAvatar></ListItemAvatar> */}
             <ListItemText
-              onClick={
-                (() => props.setSelectedItem(props.book.title), returnTop)
-              }
+              onClick={() => {
+                props.setSelectedItem(props.book.title);
+                returnTop();
+              }}
               primary={"”" + props.book.body + "”"}
               secondary={props.book.title + ", " + props.book.author}
             />
