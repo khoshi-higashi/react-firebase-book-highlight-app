@@ -12,31 +12,23 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-// import "./Book.css";
-import { db, auth, provider } from "./firebase";
-import { collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { db, auth } from "./firebase";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
-import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Book(props) {
   const [open, setOpen] = useState(false);
-  const [input, setInput] = useState("");
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
   const [user, setUser] = useState(null);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         // user has logged in...
-        // console.log(authUser);
         setUser(authUser);
       } else {
         // user has logged out...
@@ -56,9 +48,7 @@ function Book(props) {
           name: user.displayName,
           photoUrl: user.photoURL,
         });
-        console.log("ログインしています！", user.displayName);
       } else {
-        console.log("ログインいません！");
         setUser(null);
       }
     });
@@ -87,6 +77,13 @@ function Book(props) {
     setInputAuthor(""); // clear up the input after clicking add todo button
     setInputBody(""); // clear up the input after clicking add todo button
     setOpen(false);
+  };
+
+  const returnTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -137,7 +134,9 @@ function Book(props) {
           <ListItem>
             {/* <ListItemAvatar></ListItemAvatar> */}
             <ListItemText
-              onClick={() => props.setSelectedItem(props.book.title)}
+              onClick={
+                (() => props.setSelectedItem(props.book.title), returnTop)
+              }
               primary={"”" + props.book.body + "”"}
               secondary={props.book.title + ", " + props.book.author}
             />
