@@ -136,12 +136,12 @@ function Book(props) {
             />
           </ListItem>
           {user ? (
-            <>
+            <div>
               <button onClick={(e) => setOpen(true)}>Edit</button>
               <DeleteForeverIcon
                 onClick={(event) => deleteDoc(doc(db, "books", props.book.id))}
               />
-            </>
+            </div>
           ) : (
             <></>
           )}
