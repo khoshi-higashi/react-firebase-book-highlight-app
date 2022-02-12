@@ -11,13 +11,10 @@ import {
   serverTimestamp,
   orderBy,
   query,
-  limit,
 } from "firebase/firestore";
-import InfiniteScroll from "react-infinite-scroller";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  const [input, setInput] = useState("");
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
@@ -25,10 +22,6 @@ function App() {
   const [user, setUser] = useState(null);
   const booksCollectionRef = collection(db, "books");
   const [selectedItem, setSelectedItem] = useState(0);
-
-  const loadFunc = (page) => {
-    setBooks([...books, page]);
-  };
 
   const items = (
     <ul className="books">
@@ -53,7 +46,6 @@ function App() {
           snapshot.docs.map((doc) => {
             return {
               id: doc.id,
-              // book: doc.data(),
               ...doc.data(),
             };
           })
@@ -77,19 +69,13 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("📚", inputTitle, "📕", inputAuthor, "📖", inputBody);
-  });
-
-  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("ログインしています！");
         setUser({
           name: user.displayName,
           photoUrl: user.photoURL,
         });
       } else {
-        console.log("ログインいません！");
         setUser(null);
       }
     });
