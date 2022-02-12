@@ -26,17 +26,11 @@ function Book(props) {
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
   const [user, setUser] = useState(null);
-  const [activeBook, setActiveBook] = useState(0);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
-  useEffect(() => {
-    setActiveBook(props.selectedItem);
-    console.log("selectedItem: ", props.selectedItem);
-    // console.log("activeBook: ", activeBook);
-  }, [props.selectedItem, activeBook]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
