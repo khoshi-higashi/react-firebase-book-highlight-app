@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import Book from "./Book";
+import Main from "./Main";
 import { db, auth, provider } from "./firebase";
 import {
   collection,
@@ -23,6 +24,7 @@ function App() {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
   const booksCollectionRef = collection(db, "books");
+  const [selectedItem, setSelectedItem] = useState(0);
 
   const loadFunc = (page) => {
     setBooks([...books, page]);
@@ -31,7 +33,11 @@ function App() {
   const items = (
     <ul className="books">
       {books.map((book) => (
-        <Book book={book} />
+        <Book
+          book={book}
+          setSelectedItem={setSelectedItem}
+          selectedItem={selectedItem}
+        />
       ))}
     </ul>
   );
@@ -160,6 +166,7 @@ function App() {
               Add Highlight
             </Button>
           </form>
+          <Main selectedItem={selectedItem} />
           <>{items}</>
         </>
       ) : (
