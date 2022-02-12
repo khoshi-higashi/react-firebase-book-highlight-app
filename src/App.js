@@ -22,7 +22,6 @@ function App() {
   const [user, setUser] = useState(null);
   const booksCollectionRef = collection(db, "books");
   const [selectedItem, setSelectedItem] = useState(0);
-  const [input, setInput] = useState("");
 
   const items = (
     <ul className="books">
@@ -41,7 +40,6 @@ function App() {
     // This code here... fires when the app.js loads
     onSnapshot(
       query(booksCollectionRef, orderBy("timestamp", "desc")),
-      // booksCollectionRef,
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -86,7 +84,6 @@ function App() {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         // user has logged in...
-        // console.log(authUser);
         setUser(authUser);
       } else {
         // user has logged out...

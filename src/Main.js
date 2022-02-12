@@ -5,7 +5,6 @@ import {
   orderBy,
   query,
   where,
-  doc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import Book from "./Book";

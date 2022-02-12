@@ -3,9 +3,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemAvatar,
-  Avatar,
-  ImageIcon,
   Button,
   Modal,
   Input,
@@ -13,7 +10,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { db, auth } from "./firebase";
-import { deleteDoc, doc, updateDoc, collection } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
 import { onAuthStateChanged } from "firebase/auth";
@@ -28,13 +25,7 @@ function Book(props) {
 
   useEffect(() => {
     setActiveBook(props.selectedItem);
-    console.log("selectedItem: ", props.selectedItem);
-    // console.log("activeBook: ", activeBook);
   }, [props.selectedItem, activeBook]);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
