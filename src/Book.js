@@ -28,22 +28,6 @@ function Book(props) {
   }, [props.selectedItem, activeBook]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
-      if (authUser) {
-        // user has logged in...
-        setUser(authUser);
-      } else {
-        // user has logged out...
-        setUser(null);
-      }
-    });
-    return () => {
-      // person some cleanup actions
-      unsubscribe();
-    };
-  }, [user]);
-
-  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser({
@@ -88,6 +72,10 @@ function Book(props) {
     });
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <>
       <Modal open={open} onClose={(e) => setOpen(false)}>
@@ -101,7 +89,7 @@ function Book(props) {
             padding: (2, 4, 3),
           }}
         >
-          <h1>I am a modal</h1>
+          <h1>Update content</h1>
           <FormControl>
             <InputLabel>Title</InputLabel>
             <Input
@@ -124,7 +112,10 @@ function Book(props) {
             />
           </FormControl>
           <Button
-            onClick={UpdateBook}
+            onClick={() => {
+              UpdateBook();
+              setOpen(false);
+            }}
             disabled={!inputBody && !inputAuthor && !inputTitle}
           >
             Update Book
