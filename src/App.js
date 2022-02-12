@@ -22,6 +22,7 @@ function App() {
   const [user, setUser] = useState(null);
   const booksCollectionRef = collection(db, "books");
   const [selectedItem, setSelectedItem] = useState(0);
+  const [input, setInput] = useState("");
 
   const items = (
     <ul className="books">

@@ -5,6 +5,7 @@ import {
   orderBy,
   query,
   where,
+  doc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 import Book from "./Book";
@@ -13,13 +14,14 @@ import "./Main.css";
 const Main = (props) => {
   const [books, setBooks] = useState([]);
   const [activeBook, setActiveBook] = useState([]);
+  const booksCollectionRef = collection(db, "books");
 
   useEffect(() => {
     setActiveBook(props.selectedItem);
   }, [props.selectedItem, activeBook]);
 
   const q = query(
-    collection(db, "books"),
+    booksCollectionRef,
     where("title", "==", activeBook),
     orderBy("timestamp", "desc")
   );
