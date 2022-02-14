@@ -1,8 +1,20 @@
 .book {
-  padding: 0;
-  width: 80%;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.book__body {
   text-align: center;
-  text-decoration-style: none;
-  list-style: none;
+}
+
+.book__edit {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 480px) {
+  .book {
+    min-height: 375px;
+  }
 }
