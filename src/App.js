@@ -62,8 +62,8 @@ function App() {
       timestamp: serverTimestamp(),
       user: user.displayName,
     });
-    setInputTitle(""); // clear up the input after clicking add todo button
-    setInputAuthor(""); // clear up the input after clicking add todo button
+    // setInputTitle(""); // clear up the input after clicking add todo button
+    // setInputAuthor(""); // clear up the input after clicking add todo button
     setInputBody(""); // clear up the input after clicking add todo button
   };
 
@@ -148,6 +148,19 @@ function App() {
               disabled={!inputBody}
             >
               Add Highlight
+            </Button>
+            <Button
+              type="button"
+              onClick={() => {
+                setInputAuthor("");
+                setInputTitle("");
+                setInputBody("");
+              }}
+              variant="contained"
+              color="secondary"
+              disabled={!inputBody && !inputAuthor && !inputTitle}
+            >
+              Reset
             </Button>
           </form>
           <Main selectedItem={selectedItem} />
