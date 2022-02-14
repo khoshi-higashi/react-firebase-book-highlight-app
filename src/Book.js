@@ -14,6 +14,7 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
 import { onAuthStateChanged } from "firebase/auth";
+import "./Book.css";
 
 function Book(props) {
   const [open, setOpen] = useState(false);
@@ -123,29 +124,34 @@ function Book(props) {
         </Box>
       </Modal>
       <div className="book">
-        <List>
-          <ListItem>
-            {/* <ListItemAvatar></ListItemAvatar> */}
-            <ListItemText
-              onClick={() => {
-                props.setSelectedItem(props.book.title);
-                returnTop();
-              }}
-              primary={"”" + props.book.body + "”"}
-              secondary={props.book.title + ", " + props.book.author}
-            />
-          </ListItem>
-          {user ? (
-            <div>
-              <button onClick={(e) => setOpen(true)}>Edit</button>
-              <DeleteForeverIcon
-                onClick={(event) => deleteDoc(doc(db, "books", props.book.id))}
+        <div className="book__item">
+          <List>
+            <ListItem>
+              {/* <ListItemAvatar></ListItemAvatar> */}
+              <ListItemText
+                onClick={() => {
+                  props.setSelectedItem(props.book.title);
+                  returnTop();
+                }}
+                primary={"”" + props.book.body + "”"}
+                secondary={props.book.title + ", " + props.book.author}
+                className="book__body"
               />
-            </div>
-          ) : (
-            <></>
-          )}
-        </List>
+            </ListItem>
+            {user ? (
+              <div className="book__edit">
+                <button onClick={(e) => setOpen(true)}>Edit</button>
+                <DeleteForeverIcon
+                  onClick={(event) =>
+                    deleteDoc(doc(db, "books", props.book.id))
+                  }
+                />
+              </div>
+            ) : (
+              <></>
+            )}
+          </List>
+        </div>
       </div>
     </>
   );
