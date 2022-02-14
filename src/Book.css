@@ -1,6 +1,11 @@
 .book {
   display: flex;
   align-items: center;
+  text-align: center;
+}
+
+.book__item {
+  margin: 0 auto;
 }
 
 .book__body {
