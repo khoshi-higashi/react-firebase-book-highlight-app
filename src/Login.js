@@ -8,6 +8,7 @@ import { auth, provider } from "./firebase";
 import { Button, Input, FormControl, InputLabel } from "@mui/material";
 import "./Login.css";
 import React, { useState, useEffect } from "react";
+import Logo from "./assets/btn_google_signin_dark_normal_web.png";
 
 const Login = ({ user }) => {
   const [open, setOpen] = useState(false);
@@ -34,7 +35,7 @@ const Login = ({ user }) => {
       {!user ? (
         <>
           <Button onClick={() => signInWithPopup(auth, provider)}>
-            Login with Google
+            <img src={Logo} alt="" />
           </Button>
           <p>or</p>
           <Button onClick={() => signInAnonymously(auth)}>
