@@ -17,6 +17,7 @@ const Form = ({ user }) => {
       body: inputBody,
       timestamp: serverTimestamp(),
       user: user.displayName,
+      userid: user.uid,
     });
     setInputBody(""); // clear up the input after clicking add todo button
   };
