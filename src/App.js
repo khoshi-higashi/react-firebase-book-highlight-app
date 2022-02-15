@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import Book from "./Book";
 import Main from "./Main";
+import Login from "./Login";
 import { db, auth, provider } from "./firebase";
 import {
   collection,
@@ -62,8 +63,6 @@ function App() {
       timestamp: serverTimestamp(),
       user: user.displayName,
     });
-    // setInputTitle(""); // clear up the input after clicking add todo button
-    // setInputAuthor(""); // clear up the input after clicking add todo button
     setInputBody(""); // clear up the input after clicking add todo button
   };
 
@@ -101,18 +100,7 @@ function App() {
     <div className="App">
       <h1>Book highlight submission site 📚</h1>
       <div className="app__header">
-        <div className="app__loginContainer">
-          {!user ? (
-            <Button onClick={() => signInWithPopup(auth, provider)}>
-              Sign In
-            </Button>
-          ) : (
-            <>
-              <p>{user && user.displayName}</p>
-              <Button onClick={() => auth.signOut()}>Logout</Button>
-            </>
-          )}
-        </div>
+        <Login />
       </div>
 
       {user ? (
@@ -167,7 +155,7 @@ function App() {
           <>{items}</>
         </>
       ) : (
-        <div>You need to login...</div>
+        <></>
       )}
     </div>
   );
