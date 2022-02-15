@@ -60,12 +60,12 @@ function App() {
     <div className="App">
       <h1>Book highlight submission site 📚</h1>
       <div className="app__header">
-        <Login　user={user} />
+        <Login user={user} />
       </div>
 
       {user ? (
         <>
-          <Form user={user} />
+          {user.displayName ? <Form user={user} /> : <></>}
           <Main selectedItem={selectedItem} user={user} />
           <ul className="books">
             {books.map((book) => (
@@ -75,7 +75,7 @@ function App() {
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
               />
-             ))}
+            ))}
           </ul>
         </>
       ) : (

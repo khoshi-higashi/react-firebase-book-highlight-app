@@ -1,4 +1,4 @@
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signInAnonymously } from "firebase/auth";
 import { auth, provider } from "./firebase";
 import { Button, Input, FormControl, InputLabel } from "@mui/material";
 import "./Login.css";
@@ -27,6 +27,9 @@ const Login = ({ user }) => {
         <>
           <Button onClick={() => signInWithPopup(auth, provider)}>
             Sign In
+          </Button>
+          <Button onClick={() => signInAnonymously(auth)}>
+            Anonymous Sign In
           </Button>
           <div>
             <p>You need to login...</p>
