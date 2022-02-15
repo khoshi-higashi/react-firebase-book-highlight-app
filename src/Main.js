@@ -10,14 +10,14 @@ import { db } from "./firebase";
 import Book from "./Book";
 import "./Main.css";
 
-const Main = (props) => {
+const Main = ({ user, selectedItem }) => {
   const [books, setBooks] = useState([]);
   const [activeBook, setActiveBook] = useState([]);
   const booksCollectionRef = collection(db, "books");
 
   useEffect(() => {
-    setActiveBook(props.selectedItem);
-  }, [props.selectedItem, activeBook]);
+    setActiveBook(selectedItem);
+  }, [selectedItem, activeBook]);
 
   const q = query(
     booksCollectionRef,
@@ -37,12 +37,12 @@ const Main = (props) => {
 
   return (
     <div>
-      {props.selectedItem !== 0 && (
+      {selectedItem !== 0 && (
         <div className="mainBook">
-          <p>{props.selectedItem}</p>
+          <p>{selectedItem}</p>
           <div>
             {books.map((book) => (
-              <Book book={book} />
+              <Book book={book} user={user} />
             ))}
           </div>
         </div>

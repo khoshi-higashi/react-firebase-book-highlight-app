@@ -9,55 +9,40 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { db, auth } from "./firebase";
+import { db } from "./firebase";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
-import { onAuthStateChanged } from "firebase/auth";
 import "./Book.css";
 
-function Book(props) {
+function Book({ user, book, setSelectedItem, selectedItem }) {
   const [open, setOpen] = useState(false);
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
-  const [user, setUser] = useState(null);
   const [activeBook, setActiveBook] = useState(0);
 
   useEffect(() => {
-    setActiveBook(props.selectedItem);
-  }, [props.selectedItem, activeBook]);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({
-          name: user.displayName,
-          photoUrl: user.photoURL,
-        });
-      } else {
-        setUser(null);
-      }
-    });
-  }, []);
+    setActiveBook(selectedItem);
+  }, [selectedItem, activeBook]);
 
   const UpdateBook = () => {
     if (inputTitle !== "") {
-      updateDoc(doc(db, "books", props.book.id), {
+      updateDoc(doc(db, "books", book.id), {
         title: inputTitle,
       });
     }
     if (inputAuthor !== "") {
-      updateDoc(doc(db, "books", props.book.id), {
+      updateDoc(doc(db, "books", book.id), {
         author: inputAuthor,
       });
     }
     if (inputBody !== "") {
-      updateDoc(doc(db, "books", props.book.id), {
+      updateDoc(doc(db, "books", book.id), {
         body: inputBody,
       });
     }
-    updateDoc(doc(db, "books", props.book.id), {
+    updateDoc(doc(db, "books", book.id), {
       user: user.displayName,
     });
     setInputTitle("");
@@ -75,7 +60,7 @@ function Book(props) {
 
   return (
     <>
-      <Modal open={open} onClose={(e) => setOpen(false)}>
+      <Modal open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{
             position: "absolute",
@@ -125,21 +110,19 @@ function Book(props) {
             <ListItem>
               <ListItemText
                 onClick={() => {
-                  props.setSelectedItem(props.book.title);
+                  setSelectedItem(book.title);
                   returnTop();
                 }}
-                primary={"”" + props.book.body + "”"}
-                secondary={props.book.title + ", " + props.book.author}
+                primary={"”" + book.body + "”"}
+                secondary={book.title + ", " + book.author}
                 className="book__body"
               />
             </ListItem>
             {user ? (
               <div className="book__edit">
-                <button onClick={(e) => setOpen(true)}>Edit</button>
+                <button onClick={() => setOpen(true)}>Edit</button>
                 <DeleteForeverIcon
-                  onClick={(event) =>
-                    deleteDoc(doc(db, "books", props.book.id))
-                  }
+                  onClick={() => deleteDoc(doc(db, "books", book.id))}
                 />
               </div>
             ) : (
