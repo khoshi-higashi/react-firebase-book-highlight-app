@@ -1,8 +1,13 @@
-import { signInWithPopup, signInAnonymously } from "firebase/auth";
+import {
+  signInWithPopup,
+  signInAnonymously,
+  updateProfile,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth, provider } from "./firebase";
 import { Button, Input, FormControl, InputLabel } from "@mui/material";
 import "./Login.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Login = ({ user }) => {
   const [open, setOpen] = useState(false);
@@ -15,6 +20,9 @@ const Login = ({ user }) => {
     event.preventDefault();
 
     if (inputUsername !== "") {
+      updateProfile(auth.currentUser, {
+        displayName: inputUsername,
+      });
       setUsername(inputUsername);
     }
     setInputUsername("");
@@ -45,7 +53,7 @@ const Login = ({ user }) => {
             {open ? (
               <div>
                 <FormControl>
-                  <InputLabel>Username</InputLabel>
+                  <InputLabel>Update Username</InputLabel>
                   <Input
                     value={inputUsername}
                     onChange={(event) => setInputUsername(event.target.value)}
