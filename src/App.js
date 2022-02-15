@@ -60,7 +60,7 @@ function App() {
     <div className="App">
       <h1>Book highlight submission site 📚</h1>
       <div className="app__header">
-        <Login />
+        <Login　user={user} />
       </div>
 
       {user ? (
@@ -75,7 +75,7 @@ function App() {
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
               />
-             ))} 
+             ))}
           </ul>
         </>
       ) : (
