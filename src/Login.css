@@ -1,10 +1,9 @@
 .user__name {
-  width: 100px;
   text-align: center;
   margin: 0 auto;
   color: #111;
 }
 
-.user__name:hover {
+.user__button:hover {
   cursor: pointer;
 }
