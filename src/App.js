@@ -59,7 +59,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Book highlight submission site 📚</h1>
+      <h1>Book Highlight 📚</h1>
       <div className="app__header">
         <Login user={user} />
       </div>

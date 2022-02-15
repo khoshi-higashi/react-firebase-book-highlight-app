@@ -44,16 +44,17 @@ const Form = ({ user }) => {
           onChange={(event) => setInputBody(event.target.value)}
         />
       </FormControl>
-
-      <Button
-        type="submit"
-        onClick={addBook}
-        variant="contained"
-        color="primary"
-        disabled={!inputBody}
-      >
-        Add Highlight
-      </Button>
+      <p>
+        <Button
+          type="submit"
+          onClick={addBook}
+          variant="contained"
+          color="primary"
+          disabled={!inputBody}
+        >
+          Add Highlight
+        </Button>
+      </p>
       <Button
         type="button"
         onClick={() => {
