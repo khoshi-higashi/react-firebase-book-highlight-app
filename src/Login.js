@@ -61,13 +61,15 @@ const Login = ({ user }) => {
                     onChange={(event) => setInputUsername(event.target.value)}
                   />
                 </FormControl>
-                <Button
-                  onClick={UpdateUsername}
-                  disabled={!inputUsername}
-                  type="submit"
-                >
-                  Update Username
-                </Button>
+                <p>
+                  <Button
+                    onClick={UpdateUsername}
+                    disabled={!inputUsername}
+                    type="submit"
+                  >
+                    Update Username
+                  </Button>
+                </p>
               </div>
             ) : (
               <div></div>
