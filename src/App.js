@@ -66,15 +66,16 @@ function App() {
       {user ? (
         <>
           <Form user={user} />
-          <Main selectedItem={selectedItem} />
+          <Main selectedItem={selectedItem} user={user} />
           <ul className="books">
             {books.map((book) => (
               <Book
+                user={user}
                 book={book}
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
               />
-            ))}
+             ))} 
           </ul>
         </>
       ) : (
