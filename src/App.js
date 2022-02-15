@@ -30,19 +30,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser({
-          name: user.displayName,
-          photoUrl: user.photoURL,
-        });
-      } else {
-        setUser(null);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         setUser(authUser);
@@ -55,6 +42,20 @@ function App() {
       unsubscribe();
     };
   }, [user]);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+          uid: user.uid,
+        });
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
 
   return (
     <div className="App">
