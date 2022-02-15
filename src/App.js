@@ -4,6 +4,7 @@ import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import Book from "./Book";
 import Main from "./Main";
 import Login from "./Login";
+import Form from "./Form";
 import { db, auth, provider } from "./firebase";
 import {
   collection,
@@ -105,52 +106,7 @@ function App() {
 
       {user ? (
         <>
-          <form>
-            <FormControl>
-              <InputLabel>✅ Write a Title</InputLabel>
-              <Input
-                value={inputTitle}
-                onChange={(event) => setInputTitle(event.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              <InputLabel>✅ Write a Author</InputLabel>
-              <Input
-                value={inputAuthor}
-                onChange={(event) => setInputAuthor(event.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              <InputLabel>✅ Write Body</InputLabel>
-              <Input
-                value={inputBody}
-                onChange={(event) => setInputBody(event.target.value)}
-              />
-            </FormControl>
-
-            <Button
-              type="submit"
-              onClick={addBook}
-              variant="contained"
-              color="primary"
-              disabled={!inputBody}
-            >
-              Add Highlight
-            </Button>
-            <Button
-              type="button"
-              onClick={() => {
-                setInputAuthor("");
-                setInputTitle("");
-                setInputBody("");
-              }}
-              variant="contained"
-              color="secondary"
-              disabled={!inputBody && !inputAuthor && !inputTitle}
-            >
-              Reset
-            </Button>
-          </form>
+          <Form user={user} />
           <Main selectedItem={selectedItem} />
           <>{items}</>
         </>
