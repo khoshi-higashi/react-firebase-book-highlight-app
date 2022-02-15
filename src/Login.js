@@ -34,11 +34,11 @@ const Login = ({ user }) => {
       {!user ? (
         <>
           <Button onClick={() => signInWithPopup(auth, provider)}>
-            Sign In
+            Login with Google
           </Button>
           or
           <Button onClick={() => signInAnonymously(auth)}>
-            Anonymous Sign In
+            Login anonymously
           </Button>
           <div>
             <p>You need to login...</p>
