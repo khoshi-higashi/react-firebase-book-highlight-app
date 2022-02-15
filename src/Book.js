@@ -60,9 +60,9 @@ function Book(props) {
     updateDoc(doc(db, "books", props.book.id), {
       user: user.displayName,
     });
-    setInputTitle(""); // clear up the input after clicking add todo button
-    setInputAuthor(""); // clear up the input after clicking add todo button
-    setInputBody(""); // clear up the input after clicking add todo button
+    setInputTitle("");
+    setInputAuthor("");
+    setInputBody("");
     setOpen(false);
   };
 
@@ -71,10 +71,6 @@ function Book(props) {
       top: 0,
       behavior: "smooth",
     });
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
   };
 
   return (
@@ -127,7 +123,6 @@ function Book(props) {
         <div className="book__item">
           <List>
             <ListItem>
-              {/* <ListItemAvatar></ListItemAvatar> */}
               <ListItemText
                 onClick={() => {
                   props.setSelectedItem(props.book.title);
