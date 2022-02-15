@@ -55,7 +55,7 @@ const Login = ({ user }) => {
             {open ? (
               <div>
                 <FormControl>
-                  <InputLabel>Update Username</InputLabel>
+                  <InputLabel>Write a Username</InputLabel>
                   <Input
                     value={inputUsername}
                     onChange={(event) => setInputUsername(event.target.value)}
