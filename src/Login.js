@@ -28,6 +28,7 @@ const Login = ({ user }) => {
           <Button onClick={() => signInWithPopup(auth, provider)}>
             Sign In
           </Button>
+          or
           <Button onClick={() => signInAnonymously(auth)}>
             Anonymous Sign In
           </Button>
