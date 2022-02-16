@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "./firebase";
 import Book from "./Book";
 import "./Search.css";
@@ -14,17 +8,21 @@ import "./Search.css";
 const Search = ({ user }) => {
   const [input, setInput] = useState("");
   const booksCollectionRef = collection(db, "books");
-  const [serachItems, setSerachItems] = useState([]);
+  const [searchItems, setSearchItems] = useState([]);
+  const mapInput = [""];
+
+  for (let i = 0; i < input.length; i++) {
+    mapInput.push(`${input[i]}${input[i + 1]}`);
+  }
 
   const q = query(
     booksCollectionRef,
-    where("maps", "array-contains-any", [input])
-    // orderBy("timestamp", "desc")
+    where("maps", "array-contains-any", mapInput)
   );
 
   useEffect(() => {
     onSnapshot(q, (querySnapshot) => {
-      setSerachItems(
+      setSearchItems(
         querySnapshot.docs.map((doc) => {
           return { ...doc.data() };
         })
@@ -60,9 +58,9 @@ const Search = ({ user }) => {
           </p>
         )}
       </form>
-      {serachItems.map((serachItem) => (
+      {searchItems.map((searchItem) => (
         <div className="searchBook">
-          <Book book={serachItem} user={user} />
+          <Book book={searchItem} user={user} />
         </div>
       ))}
     </>
