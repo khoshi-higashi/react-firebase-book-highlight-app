@@ -12,7 +12,9 @@ const Search = ({ user }) => {
   const mapInput = [""];
 
   for (let i = 0; i < input.length; i++) {
-    mapInput.push(`${input[i]}${input[i + 1]}`);
+    if (i < 9) {
+      mapInput.push(`${input[i]}${input[i + 1]}`);
+    }
   }
 
   const q = query(
@@ -30,6 +32,11 @@ const Search = ({ user }) => {
     });
   });
 
+  const clear = (event) => {
+    setInput("");
+    event.preventDefault(); // will stop the REFRESH
+  };
+
   return (
     <>
       <form>
@@ -37,18 +44,24 @@ const Search = ({ user }) => {
           <InputLabel>🔍 Search</InputLabel>
           <Input
             value={input}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                return false;
+              }
+            }}
             onChange={(event) => setInput(event.target.value)}
           />
         </FormControl>
+        <div className="dummy">
+          <Input />
+        </div>
         {!input ? (
           <></>
         ) : (
           <p>
             <Button
               type="button"
-              onClick={() => {
-                setInput("");
-              }}
+              onClick={clear}
               variant="contained"
               color="secondary"
               disabled={!input}
