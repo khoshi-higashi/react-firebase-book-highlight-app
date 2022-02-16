@@ -45,33 +45,39 @@ const Form = ({ user }) => {
           onChange={(event) => setInputBody(event.target.value)}
         />
       </FormControl>
-      <p>
-        <Button
-          type="submit"
-          onClick={addBook}
-          variant="contained"
-          color="primary"
-          disabled={!inputBody}
-        >
-          Add Highlight
-        </Button>
-      </p>
+      {!inputBody ? (
+        <></>
+      ) : (
+        <p>
+          <Button
+            type="submit"
+            onClick={addBook}
+            variant="contained"
+            color="primary"
+            disabled={!inputBody}
+          >
+            Add Highlight
+          </Button>
+        </p>
+      )}
       {!inputBody && !inputAuthor && !inputTitle ? (
         <></>
       ) : (
-        <Button
-          type="button"
-          onClick={() => {
-            setInputAuthor("");
-            setInputTitle("");
-            setInputBody("");
-          }}
-          variant="contained"
-          color="secondary"
-          disabled={!inputBody && !inputAuthor && !inputTitle}
-        >
-          Reset
-        </Button>
+        <p>
+          <Button
+            type="button"
+            onClick={() => {
+              setInputAuthor("");
+              setInputTitle("");
+              setInputBody("");
+            }}
+            variant="contained"
+            color="secondary"
+            disabled={!inputBody && !inputAuthor && !inputTitle}
+          >
+            Reset
+          </Button>
+        </p>
       )}
     </form>
   );
