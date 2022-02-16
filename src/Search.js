@@ -71,11 +71,15 @@ const Search = ({ user }) => {
           </p>
         )}
       </form>
-      {searchItems.map((searchItem) => (
+      {searchItems.length > 0 ? (
         <div className="searchBook">
-          <Book book={searchItem} user={user} />
+          {searchItems.map((searchItem) => (
+            <Book book={searchItem} user={user} />
+          ))}
         </div>
-      ))}
+      ) : (
+        <></>
+      )}
     </>
   );
 };
