@@ -11,16 +11,30 @@ const Form = ({ user }) => {
   const maps = [];
 
   for (let i = 0; i < inputBody.length; i++) {
-    maps.push(`${inputBody[i]}${inputBody[i + 1]}`);
+    if (i === 0) {
+      maps.push(`${inputBody[i]}`);
+    } else if (i + 1 <= inputBody.length) {
+      maps.push(`${inputBody[i - 1]}${inputBody[i]}`);
+    }
   }
 
   for (let i = 0; i < inputTitle.length; i++) {
-    maps.push(`${inputTitle[i]}${inputTitle[i + 1]}`);
+    if (i === 0) {
+      maps.push(`${inputTitle[i]}`);
+    } else if (i + 1 <= inputTitle.length) {
+      maps.push(`${inputTitle[i - 1]}${inputTitle[i]}`);
+    }
   }
 
   for (let i = 0; i < inputAuthor.length; i++) {
-    maps.push(`${inputAuthor[i]}${inputAuthor[i + 1]}`);
+    if (i === 0) {
+      maps.push(`${inputAuthor[i]}`);
+    } else if (i + 1 <= inputAuthor.length) {
+      maps.push(`${inputAuthor[i - 1]}${inputAuthor[i]}`);
+    }
   }
+
+  console.log(maps);
 
   const addBook = (event) => {
     event.preventDefault(); // will stop the REFRESH
