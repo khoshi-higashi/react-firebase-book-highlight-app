@@ -4,6 +4,7 @@ import Book from "./Book";
 import Main from "./Main";
 import Login from "./Login";
 import Form from "./Form";
+import Search from "./Search";
 import { db, auth } from "./firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
@@ -68,6 +69,7 @@ function App() {
       {user ? (
         <>
           {user.displayName ? <Form user={user} /> : <></>}
+          <Search user={user} />
           {selectedItem !== "" ? (
             <>
               <p>
