@@ -56,19 +56,23 @@ const Form = ({ user }) => {
           Add Highlight
         </Button>
       </p>
-      <Button
-        type="button"
-        onClick={() => {
-          setInputAuthor("");
-          setInputTitle("");
-          setInputBody("");
-        }}
-        variant="contained"
-        color="secondary"
-        disabled={!inputBody && !inputAuthor && !inputTitle}
-      >
-        Reset
-      </Button>
+      {!inputBody && !inputAuthor && !inputTitle ? (
+        <></>
+      ) : (
+        <Button
+          type="button"
+          onClick={() => {
+            setInputAuthor("");
+            setInputTitle("");
+            setInputBody("");
+          }}
+          variant="contained"
+          color="secondary"
+          disabled={!inputBody && !inputAuthor && !inputTitle}
+        >
+          Reset
+        </Button>
+      )}
     </form>
   );
 };
