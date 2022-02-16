@@ -13,7 +13,14 @@ const Form = ({ user }) => {
   for (let i = 0; i < inputBody.length; i++) {
     maps.push(`${inputBody[i]}${inputBody[i + 1]}`);
   }
-  console.log(maps);
+
+  for (let i = 0; i < inputTitle.length; i++) {
+    maps.push(`${inputTitle[i]}${inputTitle[i + 1]}`);
+  }
+
+  for (let i = 0; i < inputAuthor.length; i++) {
+    maps.push(`${inputAuthor[i]}${inputAuthor[i + 1]}`);
+  }
 
   const addBook = (event) => {
     event.preventDefault(); // will stop the REFRESH
