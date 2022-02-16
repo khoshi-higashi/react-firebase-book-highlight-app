@@ -8,6 +8,12 @@ const Form = ({ user }) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
+  const maps = [];
+
+  for (let i = 0; i < inputBody.length; i++) {
+    maps.push(`${inputBody[i]}${inputBody[i + 1]}`);
+  }
+  console.log(maps);
 
   const addBook = (event) => {
     event.preventDefault(); // will stop the REFRESH
@@ -18,8 +24,9 @@ const Form = ({ user }) => {
       timestamp: serverTimestamp(),
       user: user.displayName,
       userid: user.uid,
+      maps: maps,
     });
-    setInputBody(""); // clear up the input after clicking add todo button
+    setInputBody("");
   };
 
   return (
