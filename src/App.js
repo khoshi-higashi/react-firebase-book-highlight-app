@@ -7,11 +7,12 @@ import Form from "./Form";
 import { db, auth } from "./firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
+import { Button } from "@mui/material";
 
 function App() {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedItem, setSelectedItem] = useState("");
 
   useEffect(() => {
     onSnapshot(
@@ -67,7 +68,25 @@ function App() {
       {user ? (
         <>
           {user.displayName ? <Form user={user} /> : <></>}
-          <Main selectedItem={selectedItem} user={user} />
+          {selectedItem !== "" ? (
+            <>
+              <p>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setSelectedItem("");
+                  }}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Reset
+                </Button>
+              </p>
+              <Main selectedItem={selectedItem} user={user} />
+            </>
+          ) : (
+            <></>
+          )}
           <ul className="books">
             {books.map((book) => (
               <Book
