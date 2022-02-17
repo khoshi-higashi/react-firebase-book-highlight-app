@@ -77,6 +77,8 @@ const Search = ({ user }) => {
             <Book book={searchItem} user={user} />
           ))}
         </div>
+      ) : input.length > 0 && searchItems.length === 0 ? (
+        <>見つかりません</>
       ) : (
         <></>
       )}
