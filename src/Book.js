@@ -58,6 +58,8 @@ function Book({ user, book, setSelectedItem, selectedItem }) {
     });
   };
 
+  const bookTitle = `${book.title}, ${book.author}`;
+
   return (
     <>
       <Modal open={open} onClose={() => setOpen(false)}>
@@ -114,7 +116,7 @@ function Book({ user, book, setSelectedItem, selectedItem }) {
                   returnTop();
                 }}
                 primary={"”" + book.body + "”"}
-                secondary={book.title + ", " + book.author}
+                secondary={bookTitle}
                 className="book__body"
               />
             </ListItem>
