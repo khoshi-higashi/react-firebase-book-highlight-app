@@ -68,14 +68,13 @@ function App() {
         <Login user={user} />
       </div>
 
-      <TitleSelect
-        setSelectedItem={setSelectedItem}
-        selectedItem={selectedItem}
-        booksCollectionRef={booksCollectionRef}
-      />
-
       {user ? (
         <>
+          <TitleSelect
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+            booksCollectionRef={booksCollectionRef}
+          />
           {user.displayName ? <Form user={user} /> : <></>}
           <Search user={user} />
           {selectedItem !== "" ? (
