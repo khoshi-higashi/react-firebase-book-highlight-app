@@ -29,6 +29,9 @@ const Login = ({ user }) => {
     setOpen(false);
   };
 
+  //   console.log(user.isAnonymous);
+  console.log(user);
+
   return (
     <div className="app__loginContainer">
       {!user ? (
@@ -48,12 +51,18 @@ const Login = ({ user }) => {
         <>
           <div className="user__name">
             <Button className="user__button" onClick={toggle}>
-              {username ? <>{username}</> : <>{user.displayName}</>}
+              {username && !user.isAnonymous ? (
+                <>{username}</>
+              ) : !username && !user.isAnonymous ? (
+                <>{user.displayName}</>
+              ) : (
+                <>You are logged in anonymously</>
+              )}
             </Button>
-            {open ? (
+            {open && !user.isAnonymous ? (
               <div>
                 <FormControl>
-                  <InputLabel>Write a Username</InputLabel>
+                  <InputLabel>&#x270f; Write a Username</InputLabel>
                   <Input
                     value={inputUsername}
                     onChange={(event) => setInputUsername(event.target.value)}
