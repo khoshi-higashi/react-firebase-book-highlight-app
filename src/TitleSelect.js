@@ -24,7 +24,7 @@ const TitleSelect = ({ setSelectedItem, selectedItem, booksCollectionRef }) => {
   }, []);
 
   {
-    books.map((book) => titles.push(book.title));
+    books.map((book) => titles.push(`${book.title}`));
   }
   const setTitles = [...new Set(titles)];
 
