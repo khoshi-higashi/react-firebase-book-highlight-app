@@ -34,8 +34,6 @@ const Form = ({ user }) => {
     }
   }
 
-  console.log(maps);
-
   const addBook = (event) => {
     event.preventDefault(); // will stop the REFRESH
     addDoc(collection(db, "books"), {
