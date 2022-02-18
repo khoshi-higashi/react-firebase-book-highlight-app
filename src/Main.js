@@ -39,7 +39,7 @@ const Main = ({ user, selectedItem }) => {
     <div>
       {selectedItem !== 0 && (
         <div className="mainBook">
-          <p>{selectedItem}</p>
+          {/* <p>{selectedItem}</p> */}
           <div>
             {books.map((book) => (
               <Book book={book} user={user} />
