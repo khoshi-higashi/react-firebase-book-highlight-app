@@ -70,13 +70,13 @@ function App() {
 
       {user ? (
         <>
+          {user.displayName ? <Form user={user} /> : <></>}
+          <Search user={user} />
           <TitleSelect
             setSelectedItem={setSelectedItem}
             selectedItem={selectedItem}
             booksCollectionRef={booksCollectionRef}
           />
-          {user.displayName ? <Form user={user} /> : <></>}
-          <Search user={user} />
           {selectedItem !== "" ? (
             <>
               <p>
