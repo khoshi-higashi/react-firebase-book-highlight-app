@@ -29,9 +29,6 @@ const Login = ({ user }) => {
     setOpen(false);
   };
 
-  //   console.log(user.isAnonymous);
-  console.log(user);
-
   return (
     <div className="app__loginContainer">
       {!user ? (
