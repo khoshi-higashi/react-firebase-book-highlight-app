@@ -5,6 +5,7 @@ import Main from "./Main";
 import Login from "./Login";
 import Form from "./Form";
 import Search from "./Search";
+import TitleSelect from "./TitleSelect";
 import { db, auth } from "./firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
@@ -14,10 +15,11 @@ function App() {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState("");
+  const booksCollectionRef = collection(db, "books");
 
   useEffect(() => {
     onSnapshot(
-      query(collection(db, "books"), orderBy("timestamp", "desc")),
+      query(booksCollectionRef, orderBy("timestamp", "desc")),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -65,6 +67,12 @@ function App() {
       <div className="app__header">
         <Login user={user} />
       </div>
+
+      <TitleSelect
+        setSelectedItem={setSelectedItem}
+        selectedItem={selectedItem}
+        booksCollectionRef={booksCollectionRef}
+      />
 
       {user ? (
         <>
