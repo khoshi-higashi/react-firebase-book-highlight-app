@@ -120,7 +120,7 @@ function Book({ user, book, setSelectedItem, selectedItem }) {
                 className="book__body"
               />
             </ListItem>
-            {user.displayName ? (
+            {user.uid ===  book.userid ? (
               <div className="book__edit">
                 <button onClick={() => setOpen(true)}>Edit</button>
                 <DeleteForeverIcon
