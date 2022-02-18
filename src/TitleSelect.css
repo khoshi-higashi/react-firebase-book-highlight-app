@@ -1,0 +1,10 @@
+.select__title {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.demo-simple-select {
+  /* width: 50%; */
+  /* margin: 0 auto; */
+  text-align: center;
+}
