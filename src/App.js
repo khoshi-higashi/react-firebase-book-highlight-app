@@ -10,6 +10,7 @@ import { db, auth } from "./firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { Button } from "@mui/material";
+import FlipMove from "react-flip-move";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -97,14 +98,16 @@ function App() {
             <></>
           )}
           <ul className="books">
-            {books.map((book) => (
-              <Book
-                user={user}
-                book={book}
-                setSelectedItem={setSelectedItem}
-                selectedItem={selectedItem}
-              />
-            ))}
+            <FlipMove>
+              {books.map((book) => (
+                <Book
+                  user={user}
+                  book={book}
+                  setSelectedItem={setSelectedItem}
+                  selectedItem={selectedItem}
+                />
+              ))}
+            </FlipMove>
           </ul>
         </>
       ) : (
