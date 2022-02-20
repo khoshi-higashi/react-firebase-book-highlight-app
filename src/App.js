@@ -97,18 +97,16 @@ function App() {
           ) : (
             <></>
           )}
-          <ul className="books">
-            <FlipMove>
-              {books.map((book) => (
-                <Book
-                  user={user}
-                  book={book}
-                  setSelectedItem={setSelectedItem}
-                  selectedItem={selectedItem}
-                />
-              ))}
-            </FlipMove>
-          </ul>
+          <FlipMove className="books">
+            {books.map((book) => (
+              <Book
+                user={user}
+                book={book}
+                setSelectedItem={setSelectedItem}
+                selectedItem={selectedItem}
+              />
+            ))}
+          </FlipMove>
         </>
       ) : (
         <></>
