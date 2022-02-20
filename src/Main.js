@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import {
   collection,
   onSnapshot,
@@ -10,7 +10,7 @@ import { db } from "./firebase";
 import Book from "./Book";
 import "./Main.css";
 
-const Main = ({ user, selectedItem }) => {
+const Main = forwardRef(({ user, selectedItem }, ref) => {
   const [books, setBooks] = useState([]);
   const [activeBook, setActiveBook] = useState([]);
   const booksCollectionRef = collection(db, "books");
@@ -36,7 +36,7 @@ const Main = ({ user, selectedItem }) => {
   });
 
   return (
-    <div>
+    <div ref={ref}>
       {selectedItem !== 0 && (
         <div className="mainBook">
           <div>
@@ -48,6 +48,6 @@ const Main = ({ user, selectedItem }) => {
       )}
     </div>
   );
-};
+});
 
 export default Main;
