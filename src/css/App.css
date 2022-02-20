@@ -7,11 +7,19 @@
 
 .books {
   padding: 5px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+@media screen and (max-width: 480px) {
+  .books {
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
