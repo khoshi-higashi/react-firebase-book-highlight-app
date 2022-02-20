@@ -1,7 +1,7 @@
-import "./App.css";
+import "../css/App.css";
 import React, { useState } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
-import { db } from "./firebase";
+import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const Form = ({ user }) => {

@@ -9,11 +9,11 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { db } from "./firebase";
+import { db } from "../firebase";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
-import "./Book.css";
+import "../css/Book.css";
 
 const Book = forwardRef(
   ({ user, book, setSelectedItem, selectedItem }, ref) => {

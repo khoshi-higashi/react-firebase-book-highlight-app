@@ -6,9 +6,9 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { db } from "./firebase";
+import { db } from "../firebase";
 import Book from "./Book";
-import "./Main.css";
+import "../css/Main.css";
 
 const Main = forwardRef(({ user, selectedItem }, ref) => {
   const [books, setBooks] = useState([]);
