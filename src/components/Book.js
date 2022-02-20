@@ -14,7 +14,6 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
 import "../css/Book.css";
-import LightSpeed from "react-reveal/LightSpeed";
 
 const Book = forwardRef(
   ({ user, book, setSelectedItem, selectedItem }, ref) => {
@@ -23,7 +22,6 @@ const Book = forwardRef(
     const [inputAuthor, setInputAuthor] = useState("");
     const [inputBody, setInputBody] = useState("");
     const [activeBook, setActiveBook] = useState(0);
-    const rand = Math.random();
 
     useEffect(() => {
       setActiveBook(selectedItem);
@@ -133,55 +131,6 @@ const Book = forwardRef(
               ) : (
                 <></>
               )}
-              {/* {rand > 0.5 ? (
-                <LightSpeed left>
-                  <ListItem>
-                    <ListItemText
-                      onClick={() => {
-                        setSelectedItem(book.title);
-                        returnTop();
-                      }}
-                      primary={"”" + book.body + "”"}
-                      secondary={bookTitle}
-                      className="book__body"
-                    />
-                  </ListItem>
-                  {user.uid === book.userid ? (
-                    <div className="book__edit">
-                      <button onClick={() => setOpen(true)}>Edit</button>
-                      <DeleteForeverIcon
-                        onClick={() => deleteDoc(doc(db, "books", book.id))}
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </LightSpeed>
-              ) : (
-                <LightSpeed right>
-                  <ListItem>
-                    <ListItemText
-                      onClick={() => {
-                        setSelectedItem(book.title);
-                        returnTop();
-                      }}
-                      primary={"”" + book.body + "”"}
-                      secondary={bookTitle}
-                      className="book__body"
-                    />
-                  </ListItem>
-                  {user.uid === book.userid ? (
-                    <div className="book__edit">
-                      <button onClick={() => setOpen(true)}>Edit</button>
-                      <DeleteForeverIcon
-                        onClick={() => deleteDoc(doc(db, "books", book.id))}
-                      />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </LightSpeed>
-              )} */}
             </List>
           </div>
         </div>
