@@ -112,7 +112,28 @@ const Book = forwardRef(
         <div className="book">
           <div className="book__item">
             <List>
-              {rand > 0.5 ? (
+              <ListItem>
+                <ListItemText
+                  onClick={() => {
+                    setSelectedItem(book.title);
+                    returnTop();
+                  }}
+                  primary={"”" + book.body + "”"}
+                  secondary={bookTitle}
+                  className="book__body"
+                />
+              </ListItem>
+              {user.uid === book.userid ? (
+                <div className="book__edit">
+                  <button onClick={() => setOpen(true)}>Edit</button>
+                  <DeleteForeverIcon
+                    onClick={() => deleteDoc(doc(db, "books", book.id))}
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
+              {/* {rand > 0.5 ? (
                 <LightSpeed left>
                   <ListItem>
                     <ListItemText
@@ -160,7 +181,7 @@ const Book = forwardRef(
                     <></>
                   )}
                 </LightSpeed>
-              )}
+              )} */}
             </List>
           </div>
         </div>
