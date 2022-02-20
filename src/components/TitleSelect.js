@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { onSnapshot, orderBy, query } from "firebase/firestore";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import "./TitleSelect.css";
+import "../css/TitleSelect.css";
 
 const TitleSelect = ({ setSelectedItem, selectedItem, booksCollectionRef }) => {
   const [books, setBooks] = useState([]);

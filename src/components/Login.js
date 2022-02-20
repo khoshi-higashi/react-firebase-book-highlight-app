@@ -3,11 +3,11 @@ import {
   signInAnonymously,
   updateProfile,
 } from "firebase/auth";
-import { auth, provider } from "./firebase";
+import { auth, provider } from "../firebase";
 import { Button, Input, FormControl, InputLabel } from "@mui/material";
-import "./Login.css";
+import "../css/Login.css";
 import React, { useState } from "react";
-import googleLogo from "./assets/btn_google_signin_dark_normal_web.png";
+import googleLogo from "../assets/btn_google_signin_dark_normal_web.png";
 
 const Login = ({ user }) => {
   const [open, setOpen] = useState(false);

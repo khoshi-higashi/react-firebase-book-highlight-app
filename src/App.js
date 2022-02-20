@@ -1,11 +1,11 @@
-import "./App.css";
+import "./css/App.css";
 import React, { useEffect, useState } from "react";
-import Book from "./Book";
-import Main from "./Main";
-import Login from "./Login";
-import Form from "./Form";
-import Search from "./Search";
-import TitleSelect from "./TitleSelect";
+import Book from "./components/Book";
+import Main from "./components/Main";
+import Login from "./components/Login";
+import Form from "./components/Form";
+import Search from "./components/Search";
+import TitleSelect from "./components/TitleSelect";
 import { db, auth } from "./firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
