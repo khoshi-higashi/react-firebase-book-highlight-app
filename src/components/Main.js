@@ -41,7 +41,7 @@ const Main = forwardRef(({ user, selectedItem }, ref) => {
         <div className="mainBook">
           <div>
             {books.map((book) => (
-              <Book book={book} user={user} />
+              <Book key={book.id} book={book} user={user} />
             ))}
           </div>
         </div>
