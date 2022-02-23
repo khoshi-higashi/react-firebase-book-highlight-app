@@ -22,7 +22,7 @@ const Main = forwardRef(({ user, selectedItem }, ref) => {
   const q = query(
     booksCollectionRef,
     where("title", "==", activeBook),
-    orderBy("timestamp", "desc")
+    orderBy("timestamp", "asc")
   );
 
   useEffect(() => {
