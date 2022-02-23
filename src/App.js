@@ -99,14 +99,12 @@ function App() {
           )}
           <FlipMove className="books">
             {books.map((book) => (
-              // <LightSpeed left>
               <Book
                 user={user}
                 book={book}
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
               />
-              // </LightSpeed>
             ))}
           </FlipMove>
         </>
