@@ -100,6 +100,7 @@ function App() {
           <FlipMove className="books">
             {books.map((book) => (
               <Book
+                key={book.id}
                 user={user}
                 book={book}
                 setSelectedItem={setSelectedItem}
