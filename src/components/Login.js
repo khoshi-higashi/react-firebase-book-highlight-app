@@ -59,7 +59,7 @@ const Login = ({ user }) => {
             {open && !user.isAnonymous ? (
               <div>
                 <FormControl>
-                  <InputLabel>&#x270f; Write a Username</InputLabel>
+                  <InputLabel>&#x270f; Change a Username</InputLabel>
                   <Input
                     value={inputUsername}
                     onChange={(event) => setInputUsername(event.target.value)}
