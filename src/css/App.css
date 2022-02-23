@@ -8,6 +8,8 @@
 .books {
   width: 80%;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .App-logo {
@@ -16,10 +18,14 @@
 }
 
 @media screen and (max-width: 959px) {
+  .books {
+    display: inline;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .books {
+    display: inline;
     width: 100%;
   }
 }
