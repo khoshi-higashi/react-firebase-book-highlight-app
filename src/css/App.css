@@ -15,6 +15,9 @@
   pointer-events: none;
 }
 
+@media screen and (max-width: 959px) {
+}
+
 @media screen and (max-width: 480px) {
   .books {
     width: 100%;
