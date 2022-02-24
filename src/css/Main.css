@@ -3,9 +3,14 @@
   padding-top: 5px;
   width: 80%;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 @media screen and (max-width: 959px) {
+  .mainBook {
+    display: inline;
+  }
 }
 
 @media screen and (max-width: 480px) {
