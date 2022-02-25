@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Form from "./components/Form";
 import Search from "./components/Search";
 import TitleSelect from "./components/TitleSelect";
+import PaginatedItems from "./components/PaginatedItems";
 import { db, auth } from "./firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
@@ -68,6 +69,7 @@ function App() {
       <div className="app__header">
         <Login user={user} />
       </div>
+      <PaginatedItems />
 
       {user ? (
         <>
