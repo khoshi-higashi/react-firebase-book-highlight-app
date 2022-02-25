@@ -44,6 +44,7 @@ const Login = ({ user }) => {
           <div>
             {/* <p>You need to login...</p> */}
             <p>ログインする必要があります</p>
+            <p>Googleアカウントでログインすると投稿・編集が行えます</p>
           </div>
         </>
       ) : (
