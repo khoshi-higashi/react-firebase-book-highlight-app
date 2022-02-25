@@ -51,21 +51,24 @@ const Form = ({ user }) => {
   return (
     <form>
       <FormControl>
-        <InputLabel>✅ Write a Title</InputLabel>
+        {/* <InputLabel>✅ Write a Title</InputLabel> */}
+        <InputLabel>✅ タイトル</InputLabel>
         <Input
           value={inputTitle}
           onChange={(event) => setInputTitle(event.target.value)}
         />
       </FormControl>
       <FormControl>
-        <InputLabel>✅ Write a Author</InputLabel>
+        {/* <InputLabel>✅ Write a Author</InputLabel> */}
+        <InputLabel>✅ 著者</InputLabel>
         <Input
           value={inputAuthor}
           onChange={(event) => setInputAuthor(event.target.value)}
         />
       </FormControl>
       <FormControl>
-        <InputLabel>✅ Write Body</InputLabel>
+        {/* <InputLabel>✅ Write Body</InputLabel> */}
+        <InputLabel>✅ 本文（必須）</InputLabel>
         <Input
           value={inputBody}
           onChange={(event) => setInputBody(event.target.value)}
@@ -82,7 +85,8 @@ const Form = ({ user }) => {
             color="primary"
             disabled={!inputBody}
           >
-            Add Highlight
+            {/* Add Highlight */}
+            追加
           </Button>
         </p>
       )}
@@ -101,7 +105,8 @@ const Form = ({ user }) => {
             color="secondary"
             disabled={!inputBody && !inputAuthor && !inputTitle}
           >
-            Reset
+            {/* Reset */}
+            リセット
           </Button>
         </p>
       )}
