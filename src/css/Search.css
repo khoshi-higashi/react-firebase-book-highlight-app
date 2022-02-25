@@ -1,8 +1,25 @@
 .searchBook {
   border-bottom: 1px solid #000;
   padding-top: 5px;
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
 }
 
 .dummy {
   display: none;
+}
+
+@media screen and (max-width: 959px) {
+  .searchBook {
+    display: inline;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .searchBook {
+    width: 100%;
+  }
 }
