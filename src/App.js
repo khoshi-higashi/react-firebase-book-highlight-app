@@ -98,7 +98,7 @@ function App() {
                   variant="contained"
                   color="secondary"
                 >
-                  Reset
+                  リセット
                 </Button>
               </p>
               <Main selectedItem={selectedItem} user={user} />

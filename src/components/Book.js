@@ -74,23 +74,27 @@ const Book = forwardRef(
               padding: (2, 4, 3),
             }}
           >
-            <h1>Update content</h1>
+            {/* <h1>Update content</h1> */}
+            <h1>更新</h1>
             <FormControl>
-              <InputLabel>Title</InputLabel>
+              {/* <InputLabel>Title</InputLabel> */}
+              <InputLabel>タイトル</InputLabel>
               <Input
                 value={inputTitle}
                 onChange={(event) => setInputTitle(event.target.value)}
               />
             </FormControl>
             <FormControl>
-              <InputLabel>Author</InputLabel>
+              {/* <InputLabel>Author</InputLabel> */}
+              <InputLabel>著者</InputLabel>
               <Input
                 value={inputAuthor}
                 onChange={(event) => setInputAuthor(event.target.value)}
               />
             </FormControl>
             <FormControl>
-              <InputLabel>Body</InputLabel>
+              {/* <InputLabel>Body</InputLabel> */}
+              <InputLabel>本文</InputLabel>
               <Input
                 value={inputBody}
                 onChange={(event) => setInputBody(event.target.value)}
@@ -103,7 +107,8 @@ const Book = forwardRef(
               }}
               disabled={!inputBody && !inputAuthor && !inputTitle}
             >
-              Update Book
+              {/* Update Book */}
+              更新
             </Button>
           </Box>
         </Modal>
@@ -123,7 +128,8 @@ const Book = forwardRef(
               </ListItem>
               {user.uid === book.userid ? (
                 <div className="book__edit">
-                  <button onClick={() => setOpen(true)}>Edit</button>
+                  {/* <button onClick={() => setOpen(true)}>Edit</button> */}
+                  <button onClick={() => setOpen(true)}>編集</button>
                   <DeleteForeverIcon
                     onClick={() => deleteDoc(doc(db, "books", book.id))}
                   />
