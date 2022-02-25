@@ -8,7 +8,13 @@ import Search from "./components/Search";
 import TitleSelect from "./components/TitleSelect";
 import PaginatedItems from "./components/PaginatedItems";
 import { db, auth } from "./firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  limit,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { Button } from "@mui/material";
 import FlipMove from "react-flip-move";
@@ -21,7 +27,7 @@ function App() {
 
   useEffect(() => {
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "desc")),
+      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(20)),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -69,7 +75,7 @@ function App() {
       <div className="app__header">
         <Login user={user} />
       </div>
-      <PaginatedItems />
+      {/* <PaginatedItems /> */}
 
       {user ? (
         <>
