@@ -32,7 +32,7 @@ const TitleSelect = ({ setSelectedItem, selectedItem, booksCollectionRef }) => {
     <div className="select__title">
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">
-          Select a Book Title
+          書籍のタイトルを選択してください
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"

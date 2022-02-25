@@ -41,7 +41,7 @@ const Search = ({ user }) => {
     <>
       <form>
         <FormControl>
-          <InputLabel>🔍 Search</InputLabel>
+          <InputLabel>🔍 検索</InputLabel>
           <Input
             value={input}
             onKeyDown={(e) => {
@@ -66,7 +66,7 @@ const Search = ({ user }) => {
               color="secondary"
               disabled={!input}
             >
-              Reset
+              リセット
             </Button>
           </p>
         )}
