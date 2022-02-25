@@ -6,8 +6,15 @@ import Login from "./components/Login";
 import Form from "./components/Form";
 import Search from "./components/Search";
 import TitleSelect from "./components/TitleSelect";
+// import PaginatedItems from "./components/PaginatedItems";
 import { db, auth } from "./firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  limit,
+} from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { Button } from "@mui/material";
 import FlipMove from "react-flip-move";
@@ -20,7 +27,7 @@ function App() {
 
   useEffect(() => {
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "desc")),
+      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(20)),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -68,6 +75,9 @@ function App() {
       <div className="app__header">
         <Login user={user} />
       </div>
+      <p>現在読み込み数を制限しています</p>
+      <p>検索 or 書籍タイトル選択をご利用ください</p>
+      {/* <PaginatedItems /> */}
 
       {user ? (
         <>
