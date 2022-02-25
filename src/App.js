@@ -75,6 +75,7 @@ function App() {
       <div className="app__header">
         <Login user={user} />
       </div>
+      <p>現在読み込み数を制限しています</p>
       {/* <PaginatedItems /> */}
 
       {user ? (
