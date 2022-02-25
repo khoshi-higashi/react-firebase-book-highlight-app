@@ -6,7 +6,7 @@ import Login from "./components/Login";
 import Form from "./components/Form";
 import Search from "./components/Search";
 import TitleSelect from "./components/TitleSelect";
-import PaginatedItems from "./components/PaginatedItems";
+// import PaginatedItems from "./components/PaginatedItems";
 import { db, auth } from "./firebase";
 import {
   collection,
@@ -76,6 +76,7 @@ function App() {
         <Login user={user} />
       </div>
       <p>現在読み込み数を制限しています</p>
+      <p>検索 or 書籍タイトル選択をご利用ください</p>
       {/* <PaginatedItems /> */}
 
       {user ? (
