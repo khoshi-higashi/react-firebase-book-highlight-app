@@ -38,10 +38,12 @@ const Login = ({ user }) => {
           </Button>
           <p>or</p>
           <Button onClick={() => signInAnonymously(auth)}>
-            Login anonymously
+            {/* Login anonymously */}
+            匿名ログイン
           </Button>
           <div>
-            <p>You need to login...</p>
+            {/* <p>You need to login...</p> */}
+            <p>ログインする必要があります</p>
           </div>
         </>
       ) : (
@@ -53,13 +55,15 @@ const Login = ({ user }) => {
               ) : !username && !user.isAnonymous ? (
                 <>{user.displayName}</>
               ) : (
-                <>You are logged in anonymously</>
+                // <>You are logged in anonymously</>
+                <>匿名でログインしています</>
               )}
             </Button>
             {open && !user.isAnonymous ? (
               <div>
                 <FormControl>
-                  <InputLabel>&#x270f; Change a Username</InputLabel>
+                  {/* <InputLabel>&#x270f; Change a Username</InputLabel> */}
+                  <InputLabel>&#x270f; ユーザー名を変更</InputLabel>
                   <Input
                     value={inputUsername}
                     onChange={(event) => setInputUsername(event.target.value)}
@@ -71,7 +75,8 @@ const Login = ({ user }) => {
                     disabled={!inputUsername}
                     type="submit"
                   >
-                    Update Username
+                    {/* Update Username */}
+                    ユーザー名を更新します
                   </Button>
                 </p>
               </div>
@@ -79,7 +84,7 @@ const Login = ({ user }) => {
               <div></div>
             )}
           </div>
-          <Button onClick={() => auth.signOut()}>Logout</Button>
+          <Button onClick={() => auth.signOut()}>ログアウト</Button>
         </>
       )}
     </div>
