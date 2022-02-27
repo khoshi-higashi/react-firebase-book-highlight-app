@@ -75,12 +75,12 @@ function App() {
       <div className="app__header">
         <Login user={user} />
       </div>
-      <p>現在読み込み数を制限しています</p>
-      <p>検索 or 書籍タイトル選択をご利用ください</p>
       {/* <PaginatedItems /> */}
 
       {user ? (
         <>
+          <p>現在読み込み数を制限しています</p>
+          <p>検索 or 書籍タイトル選択をご利用ください</p>
           {user.displayName ? <Form user={user} /> : <></>}
           <Search user={user} />
           <TitleSelect
