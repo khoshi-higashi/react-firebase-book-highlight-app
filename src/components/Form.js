@@ -1,14 +1,15 @@
 import "../css/App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-const Form = ({ user }) => {
-  const [inputTitle, setInputTitle] = useState("");
+const Form = ({ user, selectedItem, booksCollectionRef }) => {
+  const [inputTitle, setInputTitle] = useState(selectedItem);
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
   const maps = [];
+  const [books, setBooks] = useState([]);
 
   for (let i = 0; i < inputBody.length; i++) {
     if (i === 0) {
@@ -47,6 +48,15 @@ const Form = ({ user }) => {
     });
     setInputBody("");
   };
+
+  const q = query(
+    booksCollectionRef,
+    where("title", "=", selectedItem),
+    limit(1)
+  );
+
+  setInputAuthor(q.author)
+
 
   return (
     <form>

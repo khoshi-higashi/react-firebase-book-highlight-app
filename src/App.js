@@ -81,7 +81,7 @@ function App() {
         <>
           <p>現在読み込み数を制限しています</p>
           <p>検索 or 書籍タイトル選択をご利用ください</p>
-          {user.displayName ? <Form user={user} /> : <></>}
+          {user.displayName ? <Form user={user} selectedItem={selectedItem} booksCollectionRef={booksCollectionRef} /> : <></>}
           <Search user={user} />
           <TitleSelect
             setSelectedItem={setSelectedItem}
