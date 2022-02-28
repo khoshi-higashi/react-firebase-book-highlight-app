@@ -129,7 +129,7 @@ const Book = forwardRef(
               {user.uid === book.userid ? (
                 <div className="book__edit">
                   {/* <button onClick={() => setOpen(true)}>Edit</button> */}
-                  <button onClick={() => setOpen(true)}>編集</button>
+                  {/* <button onClick={() => setOpen(true)}>編集</button> */}
                   <DeleteForeverIcon
                     onClick={() => deleteDoc(doc(db, "books", book.id))}
                   />
