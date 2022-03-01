@@ -63,7 +63,7 @@ const Book = forwardRef(
 
     return (
       <div ref={ref}>
-        <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal className="modal" open={open} onClose={() => setOpen(false)}>
           <Box
             sx={{
               position: "absolute",
