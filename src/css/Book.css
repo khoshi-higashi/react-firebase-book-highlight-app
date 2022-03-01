@@ -20,6 +20,7 @@
 .book__body__title {
   font-size: 14px;
   color: #00000099;
+  cursor: pointer;
 }
 
 .book__edit {
@@ -55,7 +56,6 @@
 
   .book__item__modal {
     width: 95%;
-    /* padding:0 5px ; */
     margin: 0 auto;
     font-size: 16px;
     color: #000000;
