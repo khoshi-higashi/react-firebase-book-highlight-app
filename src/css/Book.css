@@ -45,6 +45,7 @@
     align-items: center;
     text-align: center;
     min-height: 375px;
+    padding: 5px 0;
   }
 
   .book__item__modal {
