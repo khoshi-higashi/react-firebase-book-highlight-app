@@ -63,7 +63,7 @@ const Book = forwardRef(
 
     return (
       <div ref={ref}>
-        <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal className="modal" open={open} onClose={() => setOpen(false)}>
           <Box
             sx={{
               position: "absolute",
@@ -74,57 +74,40 @@ const Book = forwardRef(
               padding: (2, 4, 3),
             }}
           >
-            {/* <h1>Update content</h1> */}
-            <h1>更新</h1>
-            <FormControl>
-              {/* <InputLabel>Title</InputLabel> */}
-              <InputLabel>タイトル</InputLabel>
-              <Input
-                value={inputTitle}
-                onChange={(event) => setInputTitle(event.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              {/* <InputLabel>Author</InputLabel> */}
-              <InputLabel>著者</InputLabel>
-              <Input
-                value={inputAuthor}
-                onChange={(event) => setInputAuthor(event.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              {/* <InputLabel>Body</InputLabel> */}
-              <InputLabel>本文</InputLabel>
-              <Input
-                value={inputBody}
-                onChange={(event) => setInputBody(event.target.value)}
-              />
-            </FormControl>
-            <Button
-              onClick={() => {
-                UpdateBook();
-                setOpen(false);
-              }}
-              disabled={!inputBody && !inputAuthor && !inputTitle}
-            >
-              {/* Update Book */}
-              更新
-            </Button>
+            <div className="book__modal">
+              <div className="book__item__modal">
+                ”{book.body}”<br />
+                <span>{bookTitle}</span>
+              </div>
+            </div>
           </Box>
         </Modal>
         <div className="book">
           <div className="book__item">
             <List>
               <ListItem>
-                <ListItemText
-                  onClick={() => {
-                    setSelectedItem(book.title);
-                    returnTop();
-                  }}
-                  primary={"”" + book.body + "”"}
-                  secondary={bookTitle}
-                  className="book__body"
-                />
+                <p className="book__body">
+                  {window.innerWidth < 480 ? (
+                    <span
+                      className="book__body__body"
+                      onClick={() => setOpen(true)}
+                    >
+                      ”{book.body}”
+                    </span>
+                  ) : (
+                    <span className="book__body__body">”{book.body}”</span>
+                  )}
+                  <br />
+                  <span
+                    className="book__body__title"
+                    onClick={() => {
+                      setSelectedItem(book.title);
+                      returnTop();
+                    }}
+                  >
+                    {bookTitle}
+                  </span>
+                </p>
               </ListItem>
               {user.uid === book.userid ? (
                 <div className="book__edit">
