@@ -87,12 +87,16 @@ const Book = forwardRef(
             <List>
               <ListItem>
                 <p className="book__body">
-                  <span
-                    className="book__body__body"
-                    onClick={() => setOpen(true)}
-                  >
-                    ”{book.body}”
-                  </span>
+                  {window.innerWidth < 480 ? (
+                    <span
+                      className="book__body__body"
+                      onClick={() => setOpen(true)}
+                    >
+                      ”{book.body}”
+                    </span>
+                  ) : (
+                    <span className="book__body__body">”{book.body}”</span>
+                  )}
                   <br />
                   <span
                     className="book__body__title"
