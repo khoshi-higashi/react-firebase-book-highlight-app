@@ -29,17 +29,10 @@
   justify-content: center;
 }
 
-.modal {
-  display: none;
-}
-
 @media screen and (max-width: 959px) {
 }
 
 @media screen and (max-width: 480px) {
-  .modal {
-    display: inline;
-  }
   .book {
     padding: 5px 0;
     border-top: 1px solid #999;
