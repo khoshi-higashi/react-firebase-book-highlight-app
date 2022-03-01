@@ -69,8 +69,6 @@ const Book = forwardRef(
               position: "absolute",
               magin: "auto",
               bgcolor: "background.paper",
-              border: "2px solid #000",
-              boxShadow: 5,
               padding: (2, 4, 3),
             }}
           >
