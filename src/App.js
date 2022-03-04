@@ -23,6 +23,7 @@ function App() {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState("");
+  const [open, setOpen] = useState(false);
   const booksCollectionRef = collection(db, "books");
 
   useEffect(() => {
@@ -69,6 +70,8 @@ function App() {
     });
   }, []);
 
+  const toggle = () => setOpen(!open);
+
   return (
     <div className="App">
       <h1>Book Highlight 📚</h1>
@@ -81,7 +84,22 @@ function App() {
         <>
           <p>現在読み込み数を制限しています</p>
           <p>検索 or 書籍タイトル選択をご利用ください</p>
-          {user.displayName ? (
+          {user.displayName && window.innerWidth < 480 ? (
+            <>
+              <Button className="form__button" onClick={toggle}>
+                追加する
+              </Button>
+              {open ? (
+                <Form
+                  user={user}
+                  selectedItem={selectedItem}
+                  booksCollectionRef={booksCollectionRef}
+                />
+              ) : (
+                <></>
+              )}
+            </>
+          ) : user.displayName ? (
             <Form
               user={user}
               selectedItem={selectedItem}
