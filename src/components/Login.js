@@ -37,12 +37,8 @@ const Login = ({ user }) => {
             <img src={googleLogo} alt="" />
           </Button>
           <p>or</p>
-          <Button onClick={() => signInAnonymously(auth)}>
-            {/* Login anonymously */}
-            匿名ログイン
-          </Button>
+          <Button onClick={() => signInAnonymously(auth)}>匿名ログイン</Button>
           <div>
-            {/* <p>You need to login...</p> */}
             <p>ログインする必要があります</p>
             <p>Googleアカウントでログインすると投稿・編集が行えます</p>
           </div>
@@ -56,14 +52,12 @@ const Login = ({ user }) => {
               ) : !username && !user.isAnonymous ? (
                 <>{user.displayName}</>
               ) : (
-                // <>You are logged in anonymously</>
                 <>匿名でログインしています</>
               )}
             </Button>
             {open && !user.isAnonymous ? (
               <div>
                 <FormControl>
-                  {/* <InputLabel>&#x270f; Change a Username</InputLabel> */}
                   <InputLabel>&#x270f; ユーザー名を変更</InputLabel>
                   <Input
                     value={inputUsername}
@@ -76,7 +70,6 @@ const Login = ({ user }) => {
                     disabled={!inputUsername}
                     type="submit"
                   >
-                    {/* Update Username */}
                     ユーザー名を更新します
                   </Button>
                 </p>
