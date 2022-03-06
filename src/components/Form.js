@@ -8,7 +8,6 @@ import {
   serverTimestamp,
   where,
   limit,
-  getDocs,
   query,
   onSnapshot,
 } from "firebase/firestore";
