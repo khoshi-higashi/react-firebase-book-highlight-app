@@ -129,19 +129,18 @@ function App() {
               <Main selectedItem={selectedItem} user={user} />
             </>
           ) : (
-            <></>
+            <FlipMove className="books">
+              {books.map((book) => (
+                <Book
+                  key={book.id}
+                  user={user}
+                  book={book}
+                  setSelectedItem={setSelectedItem}
+                  selectedItem={selectedItem}
+                />
+              ))}
+            </FlipMove>
           )}
-          <FlipMove className="books">
-            {books.map((book) => (
-              <Book
-                key={book.id}
-                user={user}
-                book={book}
-                setSelectedItem={setSelectedItem}
-                selectedItem={selectedItem}
-              />
-            ))}
-          </FlipMove>
         </>
       ) : (
         <></>
