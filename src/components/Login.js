@@ -37,10 +37,10 @@ const Login = ({ user }) => {
             <img src={googleLogo} alt="" />
           </Button>
           <p>or</p>
-          <Button onClick={() => signInAnonymously(auth)}>匿名ログイン</Button>
+          <Button onClick={() => signInAnonymously(auth)}>匿名サインイン</Button>
           <div>
-            <p>ログインする必要があります</p>
-            <p>Googleアカウントでログインすると投稿・編集が行えます</p>
+            <p>サインインする必要があります</p>
+            <p>Googleアカウントでサインインすると投稿・編集が行えます</p>
           </div>
         </>
       ) : (
