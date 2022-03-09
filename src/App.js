@@ -91,7 +91,7 @@ function App() {
           {user.displayName && window.innerWidth < 480 ? (
             <>
               <Button className="form__button" onClick={toggle}>
-                追加する
+                {open === false ? "追加する" : "閉じる"}
               </Button>
               {open ? (
                 <Form
