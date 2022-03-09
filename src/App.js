@@ -80,8 +80,14 @@ function App() {
 
       {user ? (
         <>
-          {selectedItem === "" ? <p>最新の20件を表示しています</p> : <></>}
-          <p>検索 or 書籍タイトル選択をご利用ください</p>
+          {selectedItem === "" ? (
+            <>
+              <p>最新の20件を表示しています</p>
+              <p>検索 or 書籍タイトル選択をご利用ください</p>
+            </>
+          ) : (
+            <></>
+          )}
           {user.displayName && window.innerWidth < 480 ? (
             <>
               <Button className="form__button" onClick={toggle}>
