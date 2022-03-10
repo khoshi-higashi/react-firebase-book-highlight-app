@@ -15,13 +15,15 @@ import {
   limit,
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
-import { Button } from "@mui/material";
+import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import FlipMove from "react-flip-move";
 
 function App() {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState("");
+  const [searchItem, setSearchItem] = useState("");
+  // const [searchItems, setSearchItems] = useState([]);
   const [open, setOpen] = useState(false);
   const booksCollectionRef = collection(db, "books");
 
@@ -71,6 +73,11 @@ function App() {
 
   const toggle = () => setOpen(!open);
 
+  const clear = (event) => {
+    setSearchItem("");
+    event.preventDefault();
+  };
+
   return (
     <div className="App">
       <h1>Book Highlight 📚</h1>
@@ -80,7 +87,7 @@ function App() {
 
       {user ? (
         <>
-          {selectedItem === "" ? (
+          {selectedItem === "" && searchItem === "" ? (
             <>
               <p>最新の20件を表示しています</p>
               <p>検索 or 書籍タイトル選択をご利用ください</p>
@@ -112,40 +119,85 @@ function App() {
           ) : (
             <></>
           )}
-          <Search user={user} />
-          <TitleSelect
-            setSelectedItem={setSelectedItem}
-            selectedItem={selectedItem}
-            booksCollectionRef={booksCollectionRef}
-          />
-          {selectedItem !== "" ? (
-            <>
-              <p>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    setSelectedItem("");
+          {selectedItem === "" ? (
+            <form>
+              <FormControl>
+                <InputLabel>🔍 検索</InputLabel>
+                <Input
+                  value={searchItem}
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 13) {
+                      return false;
+                    }
                   }}
-                  variant="contained"
-                  color="secondary"
-                >
-                  リセット
-                </Button>
-              </p>
-              <Main selectedItem={selectedItem} user={user} />
-            </>
-          ) : (
-            <FlipMove className="books">
-              {books.map((book) => (
-                <Book
-                  key={book.id}
-                  user={user}
-                  book={book}
-                  setSelectedItem={setSelectedItem}
-                  selectedItem={selectedItem}
+                  onChange={(event) => setSearchItem(event.target.value)}
                 />
-              ))}
-            </FlipMove>
+              </FormControl>
+              <div className="dummy">
+                <Input />
+              </div>
+              {!searchItem ? (
+                <></>
+              ) : (
+                <p>
+                  <Button
+                    type="button"
+                    onClick={clear}
+                    variant="contained"
+                    color="secondary"
+                    disabled={!searchItem}
+                  >
+                    リセット
+                  </Button>
+                </p>
+              )}
+            </form>
+          ) : (
+            <></>
+          )}
+          {searchItem !== "" ? (
+            <Search
+              user={user}
+              searchItem={searchItem}
+              setSearchItem={setSearchItem}
+            />
+          ) : (
+            <>
+              <TitleSelect
+                setSelectedItem={setSelectedItem}
+                selectedItem={selectedItem}
+                booksCollectionRef={booksCollectionRef}
+              />
+              {selectedItem !== "" ? (
+                <>
+                  <p>
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        setSelectedItem("");
+                      }}
+                      variant="contained"
+                      color="secondary"
+                    >
+                      リセット
+                    </Button>
+                  </p>
+                  <Main selectedItem={selectedItem} user={user} />
+                </>
+              ) : (
+                <FlipMove className="books">
+                  {books.map((book) => (
+                    <Book
+                      key={book.id}
+                      user={user}
+                      book={book}
+                      setSelectedItem={setSelectedItem}
+                      selectedItem={selectedItem}
+                    />
+                  ))}
+                </FlipMove>
+              )}
+            </>
           )}
         </>
       ) : (

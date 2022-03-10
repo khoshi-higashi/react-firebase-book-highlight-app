@@ -5,15 +5,14 @@ import { db } from "../firebase";
 import Book from "./Book";
 import "../css/Search.css";
 
-const Search = ({ user }) => {
-  const [input, setInput] = useState("");
+const Search = ({ user, searchItem, setSearchItem }) => {
   const booksCollectionRef = collection(db, "books");
   const [searchItems, setSearchItems] = useState([]);
   const mapInput = [""];
 
-  for (let i = 0; i < input.length; i++) {
+  for (let i = 0; i < searchItem.length; i++) {
     if (i < 9) {
-      mapInput.push(`${input[i]}${input[i + 1]}`);
+      mapInput.push(`${searchItem[i]}${searchItem[i + 1]}`);
     }
   }
 
@@ -33,29 +32,29 @@ const Search = ({ user }) => {
   });
 
   const clear = (event) => {
-    setInput("");
-    event.preventDefault(); // will stop the REFRESH
+    setSearchItem("");
+    event.preventDefault();
   };
 
   return (
     <>
-      <form>
+      {/* <form>
         <FormControl>
           <InputLabel>🔍 検索</InputLabel>
           <Input
-            value={input}
+            value={searchItem}
             onKeyDown={(e) => {
               if (e.keyCode === 13) {
                 return false;
               }
             }}
-            onChange={(event) => setInput(event.target.value)}
+            onChange={(event) => setSearchItem(event.target.value)}
           />
         </FormControl>
         <div className="dummy">
           <Input />
         </div>
-        {!input ? (
+        {!searchItem ? (
           <></>
         ) : (
           <p>
@@ -64,20 +63,20 @@ const Search = ({ user }) => {
               onClick={clear}
               variant="contained"
               color="secondary"
-              disabled={!input}
+              disabled={!searchItem}
             >
               リセット
             </Button>
           </p>
         )}
-      </form>
+      </form> */}
       {searchItems.length > 0 ? (
         <div className="searchBook">
           {searchItems.map((searchItem) => (
             <Book book={searchItem} user={user} />
           ))}
         </div>
-      ) : input.length > 0 && searchItems.length === 0 ? (
+      ) : searchItem.length > 0 && searchItems.length === 0 ? (
         <>見つかりません</>
       ) : (
         <></>
