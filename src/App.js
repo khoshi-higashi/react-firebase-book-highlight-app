@@ -23,13 +23,12 @@ function App() {
   const [user, setUser] = useState(null);
   const [selectedItem, setSelectedItem] = useState("");
   const [searchItem, setSearchItem] = useState("");
-  // const [searchItems, setSearchItems] = useState([]);
   const [open, setOpen] = useState(false);
   const booksCollectionRef = collection(db, "books");
 
   useEffect(() => {
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(20)),
+      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(10)),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -93,7 +92,7 @@ function App() {
             <p>現在読み取り上限に達し、閲覧することができません</p>
           ) : selectedItem === "" && searchItem === "" ? (
             <>
-              <p>最新の20件を表示しています</p>
+              <p>最新の{books.length}件を表示しています</p>
               <p>検索 or 書籍タイトル選択をご利用ください</p>
             </>
           ) : (
