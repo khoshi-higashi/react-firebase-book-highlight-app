@@ -17,7 +17,6 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import FlipMove from "react-flip-move";
-import { Helmet } from "react-helmet";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -79,11 +78,10 @@ function App() {
     event.preventDefault();
   };
 
+  console.log(books.length);
+
   return (
     <div className="App">
-      <Helmet>
-        <title>Book Highlight 📚</title>
-      </Helmet>
       <h1>Book Highlight 📚</h1>
       <div className="app__header">
         <Login user={user} />
@@ -91,7 +89,9 @@ function App() {
 
       {user ? (
         <>
-          {selectedItem === "" && searchItem === "" ? (
+          {books.length === 0 ? (
+            <p>現在読み取り上限に達し、閲覧することができません</p>
+          ) : selectedItem === "" && searchItem === "" ? (
             <>
               <p>最新の20件を表示しています</p>
               <p>検索 or 書籍タイトル選択をご利用ください</p>
