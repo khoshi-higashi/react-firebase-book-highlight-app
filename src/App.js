@@ -77,8 +77,6 @@ function App() {
     event.preventDefault();
   };
 
-  console.log(books.length);
-
   return (
     <div className="App">
       <h1>Book Highlight 📚</h1>
