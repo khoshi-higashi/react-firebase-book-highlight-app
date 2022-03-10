@@ -17,6 +17,7 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import FlipMove from "react-flip-move";
+import { Helmet } from "react-helmet";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -80,6 +81,9 @@ function App() {
 
   return (
     <div className="App">
+      <Helmet>
+        <title>Book Highlight 📚</title>
+      </Helmet>
       <h1>Book Highlight 📚</h1>
       <div className="app__header">
         <Login user={user} />
