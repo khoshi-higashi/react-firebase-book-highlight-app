@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, disableNetwork } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
@@ -18,5 +18,9 @@ const analytics = getAnalytics(app);
 const db = getFirestore();
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
+
+// 開発時に読み込みを停止すること！
+// disableNetwork(db);
+// console.log("Network disabled!");
 
 export { db, auth, provider };

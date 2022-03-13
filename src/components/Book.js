@@ -74,7 +74,7 @@ const Book = forwardRef(
                   </span>
                 </p>
               </ListItem>
-              {user.uid === book.userid ? (
+              {user && user.uid === book.userid ? (
                 <div className="book__edit">
                   <DeleteForeverIcon
                     onClick={() => deleteDoc(doc(db, "books", book.id))}
