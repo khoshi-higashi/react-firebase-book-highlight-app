@@ -19,8 +19,8 @@ const db = getFirestore();
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
-// 読み込みを停止
-disableNetwork(db);
-console.log("Network disabled!");
+// 開発時に読み込みを停止すること！
+// disableNetwork(db);
+// console.log("Network disabled!");
 
 export { db, auth, provider };
