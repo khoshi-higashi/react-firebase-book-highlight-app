@@ -22,8 +22,6 @@ const Book = forwardRef(
       });
     };
 
-    const bookTitle = `${book.title}, ${book.author}`;
-
     return (
       <div ref={ref}>
         <Modal className="modal" open={open} onClose={() => setOpen(false)}>
@@ -38,7 +36,11 @@ const Book = forwardRef(
             <div className="book__modal">
               <div className="book__item__modal">
                 ”{book.body}”<br />
-                <span>{bookTitle}</span>
+                <span>
+                  {book.title}
+                  <br />
+                  {book.author}
+                </span>
               </div>
             </div>
           </Box>
@@ -66,7 +68,9 @@ const Book = forwardRef(
                       returnTop();
                     }}
                   >
-                    {bookTitle}
+                    {book.title}
+                    <br />
+                    {book.author}
                   </span>
                 </p>
               </ListItem>
