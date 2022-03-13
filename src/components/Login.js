@@ -36,14 +36,8 @@ const Login = ({ user }) => {
           <Button onClick={() => signInWithPopup(auth, provider)}>
             <img src={googleLogo} alt="" />
           </Button>
-          <p>or</p>
-          <Button onClick={() => signInAnonymously(auth)}>
-            匿名サインイン
-          </Button>
           <div>
-            <p>サインインする必要があります</p>
-            <p>Googleアカウントでサインインすると投稿・編集が行えます</p>
-            <p>匿名サインインでは閲覧のみ可能です</p>
+            <p>サインインすると投稿・編集が行えます</p>
           </div>
         </>
       ) : (

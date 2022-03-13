@@ -84,18 +84,19 @@ function App() {
         <Login user={user} />
       </div>
 
+      {books.length === 0 ? (
+        <p>現在読み取り上限に達し、閲覧することができません</p>
+      ) : selectedItem === "" && searchItem === "" ? (
+        <>
+          <p>最新の{books.length}件を表示しています</p>
+          <p>検索 or 書籍タイトル選択をご利用ください</p>
+        </>
+      ) : (
+        <></>
+      )}
+
       {user ? (
         <>
-          {books.length === 0 ? (
-            <p>現在読み取り上限に達し、閲覧することができません</p>
-          ) : selectedItem === "" && searchItem === "" ? (
-            <>
-              <p>最新の{books.length}件を表示しています</p>
-              <p>検索 or 書籍タイトル選択をご利用ください</p>
-            </>
-          ) : (
-            <></>
-          )}
           {user.displayName && window.innerWidth < 480 ? (
             <>
               <Button className="form__button" onClick={toggle}>
@@ -120,89 +121,100 @@ function App() {
           ) : (
             <></>
           )}
-          {selectedItem === "" ? (
-            <form>
-              <FormControl>
-                <InputLabel>🔍 検索</InputLabel>
-                <Input
-                  value={searchItem}
-                  onKeyDown={(e) => {
-                    if (e.keyCode === 13) {
-                      return false;
-                    }
-                  }}
-                  onChange={(event) => setSearchItem(event.target.value)}
-                />
-              </FormControl>
-              <div className="dummy">
-                <Input />
-              </div>
-              {!searchItem ? (
-                <></>
-              ) : (
-                <p>
-                  <Button
-                    type="button"
-                    onClick={clear}
-                    variant="contained"
-                    color="secondary"
-                    disabled={!searchItem}
-                  >
-                    リセット
-                  </Button>
-                </p>
-              )}
-            </form>
-          ) : (
-            <></>
-          )}
-          {searchItem !== "" ? (
-            <Search
-              user={user}
-              searchItem={searchItem}
-              setSearchItem={setSearchItem}
-            />
-          ) : (
-            <>
-              <TitleSelect
-                setSelectedItem={setSelectedItem}
-                selectedItem={selectedItem}
-                booksCollectionRef={booksCollectionRef}
-              />
-              {selectedItem !== "" ? (
-                <>
-                  <p>
-                    <Button
-                      type="button"
-                      onClick={() => {
-                        setSelectedItem("");
-                      }}
-                      variant="contained"
-                      color="secondary"
-                    >
-                      リセット
-                    </Button>
-                  </p>
-                  <Main selectedItem={selectedItem} user={user} />
-                </>
-              ) : (
-                <FlipMove className="books">
-                  {books.map((book) => (
-                    <Book
-                      key={book.id}
-                      user={user}
-                      book={book}
-                      setSelectedItem={setSelectedItem}
-                      selectedItem={selectedItem}
-                    />
-                  ))}
-                </FlipMove>
-              )}
-            </>
-          )}
         </>
       ) : (
         <></>
+      )}
+      {selectedItem === "" ? (
+        <form>
+          <FormControl>
+            <InputLabel>🔍 検索</InputLabel>
+            <Input
+              value={searchItem}
+              onKeyDown={(e) => {
+                if (e.keyCode === 13) {
+                  return false;
+                }
+              }}
+              onChange={(event) => setSearchItem(event.target.value)}
+            />
+          </FormControl>
+          <div className="dummy">
+            <Input />
+          </div>
+          {!searchItem ? (
+            <></>
+          ) : (
+            <p>
+              <Button
+                type="button"
+                onClick={clear}
+                variant="contained"
+                color="secondary"
+                disabled={!searchItem}
+              >
+                リセット
+              </Button>
+            </p>
+          )}
+        </form>
+      ) : (
+        <></>
+      )}
+      {searchItem !== "" ? (
+        <Search
+          user={user}
+          searchItem={searchItem}
+          setSearchItem={setSearchItem}
+        />
+      ) : (
+        <>
+          <TitleSelect
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+            booksCollectionRef={booksCollectionRef}
+          />
+          {selectedItem !== "" ? (
+            <>
+              <p>
+                <Button
+                  type="button"
+                  onClick={() => {
+                    setSelectedItem("");
+                  }}
+                  variant="contained"
+                  color="secondary"
+                >
+                  リセット
+                </Button>
+              </p>
+              <Main selectedItem={selectedItem} user={user} />
+            </>
+          ) : user ? (
+            <FlipMove className="books">
+              {books.map((book) => (
+                <Book
+                  key={book.id}
+                  user={user}
+                  book={book}
+                  setSelectedItem={setSelectedItem}
+                  selectedItem={selectedItem}
+                />
+              ))}
+            </FlipMove>
+          ) : (
+            <FlipMove className="books">
+              {books.map((book) => (
+                <Book
+                  key={book.id}
+                  book={book}
+                  setSelectedItem={setSelectedItem}
+                  selectedItem={selectedItem}
+                />
+              ))}
+            </FlipMove>
+          )}
+        </>
       )}
     </div>
   );
