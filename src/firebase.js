@@ -20,7 +20,7 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 // 開発時に読み込みを停止すること！
-// disableNetwork(db);
-// console.log("Network disabled!");
+disableNetwork(db);
+console.log("Network disabled!");
 
 export { db, auth, provider };
