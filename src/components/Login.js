@@ -1,8 +1,4 @@
-import {
-  signInWithPopup,
-  signInAnonymously,
-  updateProfile,
-} from "firebase/auth";
+import { signInWithPopup, updateProfile } from "firebase/auth";
 import { auth, provider } from "../firebase";
 import { Button, Input, FormControl, InputLabel } from "@mui/material";
 import "../css/Login.css";
@@ -44,15 +40,9 @@ const Login = ({ user }) => {
         <>
           <div className="user__name">
             <Button className="user__button" onClick={toggle}>
-              {username && !user.isAnonymous ? (
-                <>{username}</>
-              ) : !username && !user.isAnonymous ? (
-                <>{user.displayName}</>
-              ) : (
-                <>匿名でログインしています</>
-              )}
+              {username ? <>{username}</> : <>{user.displayName}</>}
             </Button>
-            {open && !user.isAnonymous ? (
+            {open ? (
               <div>
                 <FormControl>
                   <InputLabel>&#x270f; ユーザー名を変更</InputLabel>
