@@ -18,6 +18,9 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import FlipMove from "react-flip-move";
 import { animateScroll as scroll } from "react-scroll";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -25,6 +28,7 @@ function App() {
   const [selectedItem, setSelectedItem] = useState("");
   const [searchItem, setSearchItem] = useState("");
   const [open, setOpen] = useState(false);
+  const [height, setHeight] = useState(0);
   const booksCollectionRef = collection(db, "books");
 
   useEffect(() => {
@@ -82,13 +86,17 @@ function App() {
     scroll.scrollToTop();
   };
 
+  window.onscroll = () => {
+    const scroll_position = window.pageYOffset;
+    setHeight(scroll_position);
+  };
+
   return (
     <div className="App">
       <h1>Book Highlight 📚</h1>
       <div className="app__header">
         <Login user={user} />
       </div>
-
       {books.length === 0 ? (
         <p>現在読み取り上限に達し、閲覧することができません</p>
       ) : selectedItem === "" && searchItem === "" ? (
@@ -99,7 +107,6 @@ function App() {
       ) : (
         <></>
       )}
-
       {user ? (
         <>
           {user.displayName && window.innerWidth < 480 ? (
@@ -221,11 +228,18 @@ function App() {
           )}
         </>
       )}
-      <div className="return-to-top">
-        <Button className="return-to-top-button" onClick={scrollToTop}>
-          トップへ
-        </Button>
-      </div>
+      {console.log(window.innerHeight)}
+      {console.log(height)}
+      {10 < height ? (
+        <div className="return-to-top">
+          <Button className="return-to-top-button" onClick={scrollToTop}>
+            {/* トップへ */}
+            <FontAwesomeIcon icon={solid("circle-chevron-up")} size="3x" />
+          </Button>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
