@@ -18,6 +18,10 @@
   pointer-events: none;
 }
 
+.return-to-top {
+  padding: 20px;
+}
+
 @media screen and (max-width: 959px) {
   .books {
     display: inline;
