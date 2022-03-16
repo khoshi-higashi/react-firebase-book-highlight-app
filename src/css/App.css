@@ -19,7 +19,31 @@
 }
 
 .return-to-top {
-  padding: 20px;
+  /* padding: 20px; */
+  margin: 10px;
+  align-items: center;
+  /* width: 60px; */
+  height: 60px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  opacity: 0.6;
+  /* background-color: #282c34; */
+  transition: all 1s ease;
+}
+
+.return-to-top-button {
+  /* background-color: #282c34; */
+  /* width: 60px;
+  height: 60px;
+  text-decoration: none; */
+}
+.return-to-top-button::before {
+  /* font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f139";
+  font-size: 50px;
+  color: #3fefee; */
 }
 
 @media screen and (max-width: 959px) {
