@@ -17,6 +17,7 @@ import {
 import { onAuthStateChanged } from "firebase/auth";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import FlipMove from "react-flip-move";
+import { animateScroll as scroll } from "react-scroll";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -28,7 +29,7 @@ function App() {
 
   useEffect(() => {
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(20)),
+      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(15)),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -75,6 +76,10 @@ function App() {
   const clear = (event) => {
     setSearchItem("");
     event.preventDefault();
+  };
+
+  const scrollToTop = () => {
+    scroll.scrollToTop();
   };
 
   return (
@@ -216,6 +221,11 @@ function App() {
           )}
         </>
       )}
+      <div className="return-to-top">
+        <Button className="return-to-top-button" onClick={scrollToTop}>
+          トップへ
+        </Button>
+      </div>
     </div>
   );
 }
