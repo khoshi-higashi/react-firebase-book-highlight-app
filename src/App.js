@@ -18,7 +18,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import FlipMove from "react-flip-move";
 import { animateScroll as scroll } from "react-scroll";
-import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
