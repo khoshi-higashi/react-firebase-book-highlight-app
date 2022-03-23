@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Input, FormControl, InputLabel, Button } from "@mui/material";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 import Book from "./Book";
@@ -31,10 +30,10 @@ const Search = ({ user, searchItem, setSearchItem }) => {
     });
   });
 
-  const clear = (event) => {
-    setSearchItem("");
-    event.preventDefault();
-  };
+  // const clear = (event) => {
+  //   setSearchItem("");
+  //   event.preventDefault();
+  // };
 
   return (
     <>
