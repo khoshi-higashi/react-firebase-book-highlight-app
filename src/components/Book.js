@@ -1,5 +1,13 @@
 import React, { useState, useEffect, forwardRef } from "react";
-import { List, ListItem, Modal } from "@mui/material";
+import {
+  List,
+  ListItem,
+  Button,
+  Modal,
+  Input,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 import { db } from "../firebase";
 import { deleteDoc, doc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
@@ -10,6 +18,8 @@ const Book = forwardRef(
   ({ user, book, setSelectedItem, selectedItem }, ref) => {
     const [open, setOpen] = useState(false);
     const [activeBook, setActiveBook] = useState(0);
+    const [updateTitle, setUpdateTitle] = useState("");
+    const [updateTitle, setUpdateTitle] = useState("");
 
     useEffect(() => {
       setActiveBook(selectedItem);
@@ -24,6 +34,53 @@ const Book = forwardRef(
 
     return (
       <div ref={ref}>
+        <Modal>
+          {/* <Modal open={open} onClose={() => setOpen(false)}> */}
+          <Box
+            sx={{
+              position: "absolute",
+              magin: "auto",
+              bgcolor: "background.paper",
+              border: "2px solid #000",
+              boxShadow: 5,
+              padding: (2, 4, 3),
+            }}
+          >
+            <h1>更新</h1>
+            <FormControl>
+              <InputLabel>タイトル</InputLabel>
+              <Input
+                value={updateTitle}
+                onChange={(event) => setUpdateTitle(event.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel>著者</InputLabel>
+              <Input
+                value={updateAuthor}
+                onChange={(event) => setUpdateAuthor(event.target.value)}
+              />
+            </FormControl>
+            <FormControl>
+              {/* <InputLabel>Body</InputLabel> */}
+              <InputLabel>本文</InputLabel>
+              <Input
+                value={inputBody}
+                onChange={(event) => setInputBody(event.target.value)}
+              />
+            </FormControl>
+            <Button
+              onClick={() => {
+                UpdateBook();
+                setOpen(false);
+              }}
+              disabled={!inputBody && !inputAuthor && !inputTitle}
+            >
+              {/* Update Book */}
+              更新
+            </Button>
+          </Box>
+        </Modal>
         <Modal className="modal" open={open} onClose={() => setOpen(false)}>
           <Box
             sx={{
