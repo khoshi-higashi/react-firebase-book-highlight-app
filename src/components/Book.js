@@ -19,7 +19,8 @@ const Book = forwardRef(
     const [open, setOpen] = useState(false);
     const [activeBook, setActiveBook] = useState(0);
     const [updateTitle, setUpdateTitle] = useState("");
-    const [updateTitle, setUpdateTitle] = useState("");
+    const [updateAuthor, setUpdateAuthor] = useState("");
+    const [updateBody, setUpdateBody] = useState("");
 
     useEffect(() => {
       setActiveBook(selectedItem);
@@ -31,6 +32,8 @@ const Book = forwardRef(
         behavior: "smooth",
       });
     };
+
+    const updateBook = () => {};
 
     return (
       <div ref={ref}>
@@ -65,16 +68,16 @@ const Book = forwardRef(
               {/* <InputLabel>Body</InputLabel> */}
               <InputLabel>本文</InputLabel>
               <Input
-                value={inputBody}
-                onChange={(event) => setInputBody(event.target.value)}
+                value={updateBody}
+                onChange={(event) => setUpdateBody(event.target.value)}
               />
             </FormControl>
             <Button
               onClick={() => {
-                UpdateBook();
+                updateBook();
                 setOpen(false);
               }}
-              disabled={!inputBody && !inputAuthor && !inputTitle}
+              disabled={!updateBody && !updateAuthor && !updateTitle}
             >
               {/* Update Book */}
               更新
