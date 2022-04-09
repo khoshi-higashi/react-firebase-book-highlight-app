@@ -60,6 +60,10 @@
     color: #00000099;
   }
 
+  .modal__close {
+    padding-top: 40px;
+  }
+
   .book__body__modal {
     text-align: center;
   }
