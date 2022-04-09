@@ -101,6 +101,9 @@ const Book = forwardRef(
                   <br />
                   {book.author}
                 </span>
+                <p className="modal__close">
+                  <Button onClick={() => setOpen(false)}>閉じる</Button>
+                </p>
               </div>
             </div>
           </Box>
