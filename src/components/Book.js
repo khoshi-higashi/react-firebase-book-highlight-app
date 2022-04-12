@@ -9,7 +9,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { db } from "../firebase";
-import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc, collection } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
 import "../css/Book.css";
@@ -75,9 +75,9 @@ const Book = forwardRef(
         maps: maps,
       })
 
-      setInputTitle("");
-      setInputAuthor("");
-      setInputBody("");
+      setUpdateTitle("");
+      setUpdateAuthor("");
+      setUpdateBody("");
       setUpdateOpen(false);
     };
 
