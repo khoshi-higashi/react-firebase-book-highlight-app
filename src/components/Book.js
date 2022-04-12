@@ -9,7 +9,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { db } from "../firebase";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Box from "@mui/material/Box";
 import "../css/Book.css";
@@ -17,14 +17,69 @@ import "../css/Book.css";
 const Book = forwardRef(
   ({ user, book, setSelectedItem, selectedItem }, ref) => {
     const [open, setOpen] = useState(false);
+    const [updateOpen, setUpdateOpen] = useState(false);
     const [activeBook, setActiveBook] = useState(0);
     const [updateTitle, setUpdateTitle] = useState("");
     const [updateAuthor, setUpdateAuthor] = useState("");
     const [updateBody, setUpdateBody] = useState("");
+    const maps = [];
 
     useEffect(() => {
       setActiveBook(selectedItem);
     }, [selectedItem, activeBook]);
+
+    for (let i = 0; i < updateBody.length; i++) {
+      if (i === 0) {
+        maps.push(`${updateBody[i]}`);
+      } else if (i + 1 <= updateBody.length) {
+        maps.push(`${updateBody[i - 1]}${updateBody[i]}`);
+      }
+    }
+
+    for (let i = 0; i < updateTitle.length; i++) {
+      if (i === 0) {
+        maps.push(`${updateTitle[i]}`);
+      } else if (i + 1 <= updateTitle.length) {
+        maps.push(`${updateTitle[i - 1]}${updateTitle[i]}`);
+      }
+    }
+
+    for (let i = 0; i < updateAuthor.length; i++) {
+      if (i === 0) {
+        maps.push(`${updateAuthor[i]}`);
+      } else if (i + 1 <= updateAuthor.length) {
+        maps.push(`${updateAuthor[i - 1]}${updateAuthor[i]}`);
+      }
+    }
+
+    const updateBook = () => {
+      if (updateTitle !== "") {
+        updateDoc(doc(db, "books", book.id), {
+          title: updateTitle,
+        });
+      }
+
+      if (updateAuthor !== "") {
+        updateDoc(doc(db, "books", book.id), {
+          author: updateAuthor,
+        });
+      }
+
+      if (updateBody !== "") {
+        updateDoc(doc(db, "books", book.id), {
+          body: updateBody,
+        });
+      }
+
+      updateDoc(collection(db, "books", book.id), {
+        maps: maps,
+      })
+
+      setInputTitle("");
+      setInputAuthor("");
+      setInputBody("");
+      setUpdateOpen(false);
+    };
 
     const returnTop = () => {
       window.scrollTo({
@@ -33,12 +88,10 @@ const Book = forwardRef(
       });
     };
 
-    const updateBook = () => {};
 
     return (
       <div ref={ref}>
-        <Modal>
-          {/* <Modal open={open} onClose={() => setOpen(false)}> */}
+        <Modal open={updateOpen} onClose={() => setUpdateOpen(false)}>
           <Box
             sx={{
               position: "absolute",
@@ -75,7 +128,7 @@ const Book = forwardRef(
             <Button
               onClick={() => {
                 updateBook();
-                setOpen(false);
+                setUpdateOpen(false);
               }}
               disabled={!updateBody && !updateAuthor && !updateTitle}
             >
