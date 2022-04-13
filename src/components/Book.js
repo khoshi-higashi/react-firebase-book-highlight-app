@@ -91,7 +91,7 @@ const Book = forwardRef(
 
     return (
       <div ref={ref}>
-        <Modal open={updateOpen} onClose={() => setUpdateOpen(false)}>
+        <Modal className="modal" open={updateOpen} onClose={() => setUpdateOpen(false)}>
           <Box
             sx={{
               position: "absolute",
@@ -102,39 +102,42 @@ const Book = forwardRef(
               padding: (2, 4, 3),
             }}
           >
-            <h1>更新</h1>
-            <FormControl>
-              <InputLabel>タイトル</InputLabel>
-              <Input
-                value={updateTitle}
-                onChange={(event) => setUpdateTitle(event.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              <InputLabel>著者</InputLabel>
-              <Input
-                value={updateAuthor}
-                onChange={(event) => setUpdateAuthor(event.target.value)}
-              />
-            </FormControl>
-            <FormControl>
-              {/* <InputLabel>Body</InputLabel> */}
-              <InputLabel>本文</InputLabel>
-              <Input
-                value={updateBody}
-                onChange={(event) => setUpdateBody(event.target.value)}
-              />
-            </FormControl>
-            <Button
-              onClick={() => {
-                updateBook();
-                setUpdateOpen(false);
-              }}
-              disabled={!updateBody && !updateAuthor && !updateTitle}
-            >
-              {/* Update Book */}
-              更新
-            </Button>
+            <div className="book__modal">
+
+              <h1>更新</h1>
+              <FormControl>
+                <InputLabel>タイトル</InputLabel>
+                <Input
+                  value={updateTitle}
+                  onChange={(event) => setUpdateTitle(event.target.value)}
+                />
+              </FormControl>
+              <FormControl>
+                <InputLabel>著者</InputLabel>
+                <Input
+                  value={updateAuthor}
+                  onChange={(event) => setUpdateAuthor(event.target.value)}
+                />
+              </FormControl>
+              <FormControl>
+                {/* <InputLabel>Body</InputLabel> */}
+                <InputLabel>本文</InputLabel>
+                <Input
+                  value={updateBody}
+                  onChange={(event) => setUpdateBody(event.target.value)}
+                />
+              </FormControl>
+              <Button
+                onClick={() => {
+                  updateBook();
+                  setUpdateOpen(false);
+                }}
+                disabled={!updateBody && !updateAuthor && !updateTitle}
+              >
+                {/* Update Book */}
+                更新
+              </Button>
+            </div>
           </Box>
         </Modal>
         <Modal className="modal" open={open} onClose={() => setOpen(false)}>
