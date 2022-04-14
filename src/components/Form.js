@@ -19,14 +19,6 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
   const maps = [];
   const [books, setBooks] = useState([]);
 
-  for (let i = 0; i < inputBody.length; i++) {
-    if (i === 0) {
-      maps.push(`${inputBody[i]}`);
-    } else if (i + 1 <= inputBody.length) {
-      maps.push(`${inputBody[i - 1]}${inputBody[i]}`);
-    }
-  }
-
   for (let i = 0; i < inputTitle.length; i++) {
     if (i === 0) {
       maps.push(`${inputTitle[i]}`);
@@ -40,6 +32,14 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
       maps.push(`${inputAuthor[i]}`);
     } else if (i + 1 <= inputAuthor.length) {
       maps.push(`${inputAuthor[i - 1]}${inputAuthor[i]}`);
+    }
+  }
+
+  for (let i = 0; i < inputBody.length; i++) {
+    if (i === 0) {
+      maps.push(`${inputBody[i]}`);
+    } else if (i + 1 <= inputBody.length) {
+      maps.push(`${inputBody[i - 1]}${inputBody[i]}`);
     }
   }
 
