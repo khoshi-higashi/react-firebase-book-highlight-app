@@ -57,6 +57,7 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
       maps: maps,
     });
     setInputBody("");
+    setInputNo("");
   };
 
   useEffect(() => {
@@ -140,10 +141,11 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
               setInputAuthor("");
               setInputTitle("");
               setInputBody("");
+              setInputNo("");
             }}
             variant="contained"
             color="secondary"
-            disabled={!inputBody && !inputAuthor && !inputTitle}
+            disabled={!inputBody && !inputAuthor && !inputTitle && !inputNo}
           >
             {/* Reset */}
             リセット
