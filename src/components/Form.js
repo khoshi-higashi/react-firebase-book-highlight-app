@@ -16,6 +16,7 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
+  const [inputNo, setInputNo] = useState("");
   const maps = [];
   const [books, setBooks] = useState([]);
 
@@ -49,6 +50,7 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
       title: inputTitle,
       author: inputAuthor,
       body: inputBody,
+      number: inputNo,
       timestamp: serverTimestamp(),
       user: user.displayName,
       userid: user.uid,
@@ -104,6 +106,14 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
           onChange={(event) => setInputBody(event.target.value)}
         />
       </FormControl>
+      <FormControl>
+        {/* <InputLabel>✅ Write Body</InputLabel> */}
+        <InputLabel>✅ 位置No</InputLabel>
+        <Input
+          value={inputNo}
+          onChange={(event) => setInputNo(event.target.value)}
+        />
+      </FormControl>
       {!inputBody ? (
         <></>
       ) : (
@@ -120,7 +130,7 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
           </Button>
         </p>
       )}
-      {!inputBody && !inputAuthor && !inputTitle ? (
+      {!inputBody && !inputAuthor && !inputTitle && !inputNo ? (
         <></>
       ) : (
         <p>
