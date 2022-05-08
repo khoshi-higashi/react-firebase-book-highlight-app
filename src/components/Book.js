@@ -22,6 +22,7 @@ const Book = forwardRef(
     const [updateTitle, setUpdateTitle] = useState("");
     const [updateAuthor, setUpdateAuthor] = useState("");
     const [updateBody, setUpdateBody] = useState("");
+    const [updateNo, setUpdateNo] = useState("");
     const maps = [];
 
     useEffect(() => {
@@ -71,6 +72,12 @@ const Book = forwardRef(
         });
       }
 
+      if (updateNo !== "") {
+        updateDoc(doc(db, "books", book.id), {
+          number: updateNo,
+        });
+      }
+
       updateDoc(collection(db, "books", book.id), {
         maps: maps,
       })
@@ -78,6 +85,7 @@ const Book = forwardRef(
       setUpdateTitle("");
       setUpdateAuthor("");
       setUpdateBody("");
+      setUpdateNo("");
       setUpdateOpen(false);
     };
 
@@ -129,17 +137,25 @@ const Book = forwardRef(
                     onChange={(event) => setUpdateBody(event.target.value)}
                   />
                 </FormControl>
+                <FormControl>
+                  {/* <InputLabel>Body</InputLabel> */}
+                  <InputLabel>位置No</InputLabel>
+                  <Input
+                    value={updateNo}
+                    onChange={(event) => setUpdateNo(event.target.value)}
+                  />
+                </FormControl>
 
-                  <Button
-                    onClick={() => {
-                      updateBook();
-                      setUpdateOpen(false);
-                    }}
-                    disabled={!updateBody && !updateAuthor && !updateTitle}
-                  >
-                    {/* Update Book */}
-                    更新
-                  </Button>
+                <Button
+                  onClick={() => {
+                    updateBook();
+                    setUpdateOpen(false);
+                  }}
+                  disabled={!updateBody && !updateAuthor && !updateTitle && !updateNo}
+                >
+                  {/* Update Book */}
+                  更新
+                </Button>
               </div>
             </div>
           </Box>
