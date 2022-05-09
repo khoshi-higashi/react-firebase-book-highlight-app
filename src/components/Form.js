@@ -11,6 +11,9 @@ import {
   query,
   onSnapshot,
 } from "firebase/firestore";
+// import { AiFillCheckSquare } from "react-icons"
+import { IoCheckboxSharp } from "react-icons/io5"
+import { FcCheckmark } from "react-icons/fc";
 
 const Form = ({ user, selectedItem, booksCollectionRef }) => {
   const [inputTitle, setInputTitle] = useState("");
@@ -84,32 +87,32 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
   return (
     <form>
       <FormControl>
-        {/* <InputLabel>✅ Write a Title</InputLabel> */}
-        <InputLabel>✅ タイトル</InputLabel>
+        {/* <InputLabel><FcCheckmark /> Write a Title</InputLabel> */}
+        <InputLabel><FcCheckmark /> タイトル</InputLabel>
         <Input
           value={inputTitle}
           onChange={(event) => setInputTitle(event.target.value)}
         />
       </FormControl>
       <FormControl>
-        {/* <InputLabel>✅ Write a Author</InputLabel> */}
-        <InputLabel>✅ 著者</InputLabel>
+        {/* <InputLabel><FcCheckmark /> Write a Author</InputLabel> */}
+        <InputLabel><FcCheckmark /> 著者</InputLabel>
         <Input
           value={inputAuthor}
           onChange={(event) => setInputAuthor(event.target.value)}
         />
       </FormControl>
       <FormControl>
-        {/* <InputLabel>✅ Write Body</InputLabel> */}
-        <InputLabel>✅ 本文（必須）</InputLabel>
+        {/* <InputLabel><FcCheckmark /> Write Body</InputLabel> */}
+        <InputLabel><FcCheckmark /> 本文（必須）</InputLabel>
         <Input
           value={inputBody}
           onChange={(event) => setInputBody(event.target.value)}
         />
       </FormControl>
       <FormControl>
-        {/* <InputLabel>✅ Write Body</InputLabel> */}
-        <InputLabel>✅ 位置No</InputLabel>
+        {/* <InputLabel><FcCheckmark /> Write Body</InputLabel> */}
+        <InputLabel><FcCheckmark /> 位置No</InputLabel>
         <Input
           value={inputNo}
           onChange={(event) => setInputNo(event.target.value)}
