@@ -176,6 +176,12 @@ const Book = forwardRef(
                   {book.title}
                   <br />
                   {book.author}
+                  {book.no && (
+                    <>
+                      <br />
+                      位置：{book.no}
+                    </>
+                  )}
                 </span>
                 {/* <p className="modal__close">
                   <Button onClick={() => setOpen(false)}>閉じる</Button>
