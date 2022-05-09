@@ -51,6 +51,11 @@
   color: #00000099;
 }
 
+.book__item__modal__number {
+  font-size: 12px;
+  color: #00000099;
+}
+
 .book__body__modal {
   text-align: center;
 }
