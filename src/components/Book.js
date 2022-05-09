@@ -176,10 +176,10 @@ const Book = forwardRef(
                   {book.title}
                   <br />
                   {book.author}
-                  {book.no && (
+                  {book.number && (
                     <>
                       <br />
-                      位置：{book.no}
+                      位置：{book.number}
                     </>
                   )}
                 </span>
@@ -216,6 +216,12 @@ const Book = forwardRef(
                     {book.title}
                     <br />
                     {book.author}
+                    {book.number && (
+                      <>
+                        <br />
+                        位置：{book.number}
+                      </>
+                    )}
                   </span>
                 </p>
               </ListItem>
