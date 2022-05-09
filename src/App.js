@@ -20,6 +20,7 @@ import FlipMove from "react-flip-move";
 import { animateScroll as scroll } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { FcSearch } from "react-icons/fc";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -139,7 +140,7 @@ function App() {
       {selectedItem === "" ? (
         <form>
           <FormControl>
-            <InputLabel>🔍 検索</InputLabel>
+            <InputLabel><FcSearch /> 検索</InputLabel>
             <Input
               value={searchItem}
               onKeyDown={(e) => {
