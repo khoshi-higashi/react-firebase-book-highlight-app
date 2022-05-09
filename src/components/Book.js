@@ -217,10 +217,10 @@ const Book = forwardRef(
                     <br />
                     {book.author}
                     {book.number && (
-                      <>
+                      <span className="book__body__title__number">
                         <br />
                         位置：{book.number}
-                      </>
+                      </span>
                     )}
                   </span>
                 </p>
