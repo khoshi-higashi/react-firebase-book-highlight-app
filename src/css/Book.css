@@ -23,6 +23,12 @@
   cursor: pointer;
 }
 
+.book__body__title__number {
+  font-size: 12px;
+  color: #00000099;
+  cursor: pointer;
+}
+
 .book__edit {
   align-items: center;
   display: flex;
@@ -48,6 +54,11 @@
 
 .book__item__modal>span {
   font-size: 14px;
+  color: #00000099;
+}
+
+.book__item__modal__number {
+  font-size: 12px;
   color: #00000099;
 }
 

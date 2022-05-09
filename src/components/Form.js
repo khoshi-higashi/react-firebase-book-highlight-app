@@ -11,11 +11,15 @@ import {
   query,
   onSnapshot,
 } from "firebase/firestore";
+// import { AiFillCheckSquare } from "react-icons"
+import { IoCheckboxSharp } from "react-icons/io5"
+import { FcCheckmark } from "react-icons/fc";
 
 const Form = ({ user, selectedItem, booksCollectionRef }) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
+  const [inputNo, setInputNo] = useState("");
   const maps = [];
   const [books, setBooks] = useState([]);
 
@@ -49,12 +53,14 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
       title: inputTitle,
       author: inputAuthor,
       body: inputBody,
+      number: inputNo,
       timestamp: serverTimestamp(),
       user: user.displayName,
       userid: user.uid,
       maps: maps,
     });
     setInputBody("");
+    setInputNo("");
   };
 
   useEffect(() => {
@@ -81,27 +87,35 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
   return (
     <form>
       <FormControl>
-        {/* <InputLabel>✅ Write a Title</InputLabel> */}
-        <InputLabel>✅ タイトル</InputLabel>
+        {/* <InputLabel><FcCheckmark /> Write a Title</InputLabel> */}
+        <InputLabel><FcCheckmark /> タイトル</InputLabel>
         <Input
           value={inputTitle}
           onChange={(event) => setInputTitle(event.target.value)}
         />
       </FormControl>
       <FormControl>
-        {/* <InputLabel>✅ Write a Author</InputLabel> */}
-        <InputLabel>✅ 著者</InputLabel>
+        {/* <InputLabel><FcCheckmark /> Write a Author</InputLabel> */}
+        <InputLabel><FcCheckmark /> 著者</InputLabel>
         <Input
           value={inputAuthor}
           onChange={(event) => setInputAuthor(event.target.value)}
         />
       </FormControl>
       <FormControl>
-        {/* <InputLabel>✅ Write Body</InputLabel> */}
-        <InputLabel>✅ 本文（必須）</InputLabel>
+        {/* <InputLabel><FcCheckmark /> Write Body</InputLabel> */}
+        <InputLabel><FcCheckmark /> 本文（必須）</InputLabel>
         <Input
           value={inputBody}
           onChange={(event) => setInputBody(event.target.value)}
+        />
+      </FormControl>
+      <FormControl>
+        {/* <InputLabel><FcCheckmark /> Write Body</InputLabel> */}
+        <InputLabel><FcCheckmark /> 位置No</InputLabel>
+        <Input
+          value={inputNo}
+          onChange={(event) => setInputNo(event.target.value)}
         />
       </FormControl>
       {!inputBody ? (
@@ -120,7 +134,7 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
           </Button>
         </p>
       )}
-      {!inputBody && !inputAuthor && !inputTitle ? (
+      {!inputBody && !inputAuthor && !inputTitle && !inputNo ? (
         <></>
       ) : (
         <p>
@@ -130,10 +144,11 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
               setInputAuthor("");
               setInputTitle("");
               setInputBody("");
+              setInputNo("");
             }}
             variant="contained"
             color="secondary"
-            disabled={!inputBody && !inputAuthor && !inputTitle}
+            disabled={!inputBody && !inputAuthor && !inputTitle && !inputNo}
           >
             {/* Reset */}
             リセット

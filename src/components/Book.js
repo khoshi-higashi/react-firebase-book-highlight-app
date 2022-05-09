@@ -22,6 +22,7 @@ const Book = forwardRef(
     const [updateTitle, setUpdateTitle] = useState("");
     const [updateAuthor, setUpdateAuthor] = useState("");
     const [updateBody, setUpdateBody] = useState("");
+    const [updateNo, setUpdateNo] = useState("");
     const maps = [];
 
     useEffect(() => {
@@ -71,6 +72,12 @@ const Book = forwardRef(
         });
       }
 
+      if (updateNo !== "") {
+        updateDoc(doc(db, "books", book.id), {
+          number: updateNo,
+        });
+      }
+
       updateDoc(collection(db, "books", book.id), {
         maps: maps,
       })
@@ -78,6 +85,7 @@ const Book = forwardRef(
       setUpdateTitle("");
       setUpdateAuthor("");
       setUpdateBody("");
+      setUpdateNo("");
       setUpdateOpen(false);
     };
 
@@ -103,40 +111,52 @@ const Book = forwardRef(
             }}
           >
             <div className="book__modal">
+              <div className="book__item__modal">
 
-              <h1>更新</h1>
-              <FormControl>
-                <InputLabel>タイトル</InputLabel>
-                <Input
-                  value={updateTitle}
-                  onChange={(event) => setUpdateTitle(event.target.value)}
-                />
-              </FormControl>
-              <FormControl>
-                <InputLabel>著者</InputLabel>
-                <Input
-                  value={updateAuthor}
-                  onChange={(event) => setUpdateAuthor(event.target.value)}
-                />
-              </FormControl>
-              <FormControl>
-                {/* <InputLabel>Body</InputLabel> */}
-                <InputLabel>本文</InputLabel>
-                <Input
-                  value={updateBody}
-                  onChange={(event) => setUpdateBody(event.target.value)}
-                />
-              </FormControl>
-              <Button
-                onClick={() => {
-                  updateBook();
-                  setUpdateOpen(false);
-                }}
-                disabled={!updateBody && !updateAuthor && !updateTitle}
-              >
-                {/* Update Book */}
-                更新
-              </Button>
+
+                <h1>更新</h1>
+                <FormControl>
+                  <InputLabel>タイトル</InputLabel>
+                  <Input
+                    value={updateTitle}
+                    onChange={(event) => setUpdateTitle(event.target.value)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <InputLabel>著者</InputLabel>
+                  <Input
+                    value={updateAuthor}
+                    onChange={(event) => setUpdateAuthor(event.target.value)}
+                  />
+                </FormControl>
+                <FormControl>
+                  {/* <InputLabel>Body</InputLabel> */}
+                  <InputLabel>本文</InputLabel>
+                  <Input
+                    value={updateBody}
+                    onChange={(event) => setUpdateBody(event.target.value)}
+                  />
+                </FormControl>
+                <FormControl>
+                  {/* <InputLabel>Body</InputLabel> */}
+                  <InputLabel>位置No</InputLabel>
+                  <Input
+                    value={updateNo}
+                    onChange={(event) => setUpdateNo(event.target.value)}
+                  />
+                </FormControl>
+
+                <Button
+                  onClick={() => {
+                    updateBook();
+                    setUpdateOpen(false);
+                  }}
+                  disabled={!updateBody && !updateAuthor && !updateTitle && !updateNo}
+                >
+                  {/* Update Book */}
+                  更新
+                </Button>
+              </div>
             </div>
           </Box>
         </Modal>
@@ -156,6 +176,12 @@ const Book = forwardRef(
                   {book.title}
                   <br />
                   {book.author}
+                  {book.number && (
+                    <span className="book__item__modal__number">
+                      <br />
+                      位置：{book.number}
+                    </span>
+                  )}
                 </span>
                 {/* <p className="modal__close">
                   <Button onClick={() => setOpen(false)}>閉じる</Button>
@@ -190,6 +216,12 @@ const Book = forwardRef(
                     {book.title}
                     <br />
                     {book.author}
+                    {book.number && (
+                      <span className="book__body__title__number">
+                        <br />
+                        位置：{book.number}
+                      </span>
+                    )}
                   </span>
                 </p>
               </ListItem>
