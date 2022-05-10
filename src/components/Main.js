@@ -23,15 +23,34 @@ const Main = forwardRef(({ user, selectedItem }, ref) => {
   const q = query(
     booksCollectionRef,
     where("title", "==", activeBook),
-    orderBy("timestamp", "asc")
+    orderBy("timestamp", "asc"),
+    // limit(20)
   );
 
-  const q_number = query(
-    booksCollectionRef,
-    where("title", "==", activeBook),
-    orderBy("number", "asc"),
-    orderBy("timestamp", "asc")
-  );
+  // const q_number = query(
+  //   booksCollectionRef,
+  //   where("title", "==", activeBook),
+  //   orderBy("number", "asc"),
+  //   orderBy("timestamp", "asc"),
+  //   limit(20)
+  // );
+
+  // const q_next = query(
+  //   booksCollectionRef,
+  //   where("title", "==", activeBook),
+  //   orderBy("timestamp", "asc"),
+  //   limit(20),
+  //   startAfter(20)
+  // );
+
+  // const q_number_next = query(
+  //   booksCollectionRef,
+  //   where("title", "==", activeBook),
+  //   orderBy("number", "asc"),
+  //   orderBy("timestamp", "asc"),
+  //   limit(20),
+  //   startAfter(20)
+  // );
 
   useEffect(() => {
     onSnapshot(q, (querySnapshot) => {
@@ -43,25 +62,25 @@ const Main = forwardRef(({ user, selectedItem }, ref) => {
     });
   });
 
-  useEffect(() => {
-    onSnapshot(q_number, (querySnapshot) => {
-      setBooksNumber(
-        querySnapshot.docs.map((doc) => {
-          return { ...doc.data() };
-        })
-      );
-    });
-  });
+  // useEffect(() => {
+  //   onSnapshot(q_number, (querySnapshot) => {
+  //     setBooksNumber(
+  //       querySnapshot.docs.map((doc) => {
+  //         return { ...doc.data() };
+  //       })
+  //     );
+  //   });
+  // });
 
   return (
     <div ref={ref}>
       {selectedItem !== 0 && (
         <>
-          <div className="mainBook">
+          {/* <div className="mainBook">
             {booksNumber.map((book) => (
               <Book key={book.id} book={book} user={user} />
             ))}
-          </div>
+          </div> */}
           <div className="mainBook">
             {books.map((book) => (
               <Book key={book.id} book={book} user={user} />
