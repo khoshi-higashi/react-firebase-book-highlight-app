@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(15)),
+      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(16)),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
