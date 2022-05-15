@@ -182,7 +182,7 @@ const Book = forwardRef(
                         <br />
                         Kindle位置No.{book.number}
                       </span>
-                    ) : book.number && !book.kindle ? (
+                    ) : book.number && book.kindle == false ? (
                       <span className="book__body__title__number">
                         <br />
                         p{book.number}
@@ -235,7 +235,7 @@ const Book = forwardRef(
                           <br />
                           Kindle位置No.{book.number}
                         </span>
-                      ) : book.number && !book.kindle ? (
+                      ) : book.number && book.kindle == false ? (
                         <span className="book__body__title__number">
                           <br />
                           p{book.number}
