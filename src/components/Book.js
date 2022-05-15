@@ -216,12 +216,25 @@ const Book = forwardRef(
                     {book.title}
                     <br />
                     {book.author}
-                    {book.number && (
-                      <span className="book__body__title__number">
-                        <br />
-                        位置：{book.number}
-                      </span>
-                    )}
+                    {book.number && book.kindle ?
+                      (
+                        <span className="book__body__title__number">
+                          <br />
+                          Kindle位置No.{book.number}
+                        </span>
+                      ) : book.number && !book.kindle ? (
+                        <span className="book__body__title__number">
+                          <br />
+                          {book.number}ページ
+                        </span>
+                      ) : book.number ? (
+                        <span className="book__body__title__number">
+                          <br />
+                          位置No.{book.number}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
                   </span>
                 </p>
               </ListItem>
