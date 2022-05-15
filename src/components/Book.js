@@ -225,7 +225,7 @@ const Book = forwardRef(
                       ) : book.number && !book.kindle ? (
                         <span className="book__body__title__number">
                           <br />
-                          {book.number}ページ
+                          p{book.number}
                         </span>
                       ) : book.number ? (
                         <span className="book__body__title__number">
