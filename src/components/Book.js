@@ -176,12 +176,25 @@ const Book = forwardRef(
                   {book.title}
                   <br />
                   {book.author}
-                  {book.number && (
-                    <span className="book__item__modal__number">
-                      <br />
-                      位置：{book.number}
-                    </span>
-                  )}
+                  {book.number && book.kindle ?
+                    (
+                      <span className="book__body__title__number">
+                        <br />
+                        Kindle位置No.{book.number}
+                      </span>
+                    ) : book.number && !book.kindle ? (
+                      <span className="book__body__title__number">
+                        <br />
+                        p{book.number}
+                      </span>
+                    ) : book.number ? (
+                      <span className="book__body__title__number">
+                        <br />
+                        位置No.{book.number}
+                      </span>
+                    ) : (
+                      <></>
+                    )}
                 </span>
                 {/* <p className="modal__close">
                   <Button onClick={() => setOpen(false)}>閉じる</Button>
