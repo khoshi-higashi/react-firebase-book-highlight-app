@@ -171,7 +171,7 @@ const Book = forwardRef(
           >
             <div className="book__modal">
               <div className="book__item__modal">
-                ”{book.body}”<br />
+                {book.body}<br />
                 <span>
                   {book.title}
                   <br />
@@ -213,10 +213,10 @@ const Book = forwardRef(
                       className="book__body__body"
                       onClick={() => setOpen(true)}
                     >
-                      ”{book.body}”
+                      {book.body}
                     </span>
                   ) : (
-                    <span className="book__body__body">”{book.body}”</span>
+                    <span className="book__body__body">{book.body}</span>
                   )}
                   <br />
                   <span
