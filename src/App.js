@@ -21,6 +21,7 @@ import { animateScroll as scroll } from "react-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FcSearch } from "react-icons/fc";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -31,9 +32,15 @@ function App() {
   const [height, setHeight] = useState(0);
   const booksCollectionRef = collection(db, "books");
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+
   useEffect(() => {
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(15)),
+      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(16)),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
@@ -92,13 +99,14 @@ function App() {
   };
 
   return (
+    // <ThemeProvider >
     <div className="App">
       <h1>Book Highlight 📚</h1>
       <div className="app__header">
         <Login user={user} />
       </div>
       {books.length === 0 ? (
-        <p>現在読み取り上限に達し、閲覧することができません</p>
+        <p>現在メンテナンス中です</p>
       ) : selectedItem === "" && searchItem === "" ? (
         <>
           <p>最新の{books.length}件を表示しています</p>
@@ -241,6 +249,7 @@ function App() {
         <></>
       )}
     </div>
+    // </ThemeProvider>
   );
 }
 

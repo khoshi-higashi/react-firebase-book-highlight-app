@@ -1,6 +1,6 @@
 import "../css/App.css";
 import React, { useState, useEffect } from "react";
-import { Input, FormControl, InputLabel, Button } from "@mui/material";
+import { Input, FormControl, InputLabel, Button, Checkbox, FormControlLabel } from "@mui/material";
 import { db } from "../firebase";
 import {
   collection,
@@ -15,11 +15,13 @@ import {
 import { IoCheckboxSharp } from "react-icons/io5"
 import { FcCheckmark } from "react-icons/fc";
 
+
 const Form = ({ user, selectedItem, booksCollectionRef }) => {
   const [inputTitle, setInputTitle] = useState("");
   const [inputAuthor, setInputAuthor] = useState("");
   const [inputBody, setInputBody] = useState("");
   const [inputNo, setInputNo] = useState("");
+  const [kindle, setKindle] = useState(true);
   const maps = [];
   const [books, setBooks] = useState([]);
 
@@ -58,6 +60,7 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
       user: user.displayName,
       userid: user.uid,
       maps: maps,
+      kindle: kindle,
     });
     setInputBody("");
     setInputNo("");
@@ -116,6 +119,10 @@ const Form = ({ user, selectedItem, booksCollectionRef }) => {
         <Input
           value={inputNo}
           onChange={(event) => setInputNo(event.target.value)}
+        />
+      </FormControl>
+      <FormControl>
+        <FormControlLabel control={<Checkbox />} label="Kindle" checked={kindle} onChange={(event) => setKindle(event.target.checked)}
         />
       </FormControl>
       {!inputBody ? (
