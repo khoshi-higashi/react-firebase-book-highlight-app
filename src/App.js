@@ -40,7 +40,7 @@ function App() {
 
   useEffect(() => {
     onSnapshot(
-      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(16)),
+      query(booksCollectionRef, orderBy("timestamp", "desc"), limit(100)),
       (snapshot) => {
         setBooks(
           snapshot.docs.map((doc) => {
