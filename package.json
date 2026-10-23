@@ -58,5 +58,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "overrides": {
+    "handlebars": "4.7.10"
+  },
+  "resolutions": {
+    "handlebars": "4.7.10"
   }
 }
